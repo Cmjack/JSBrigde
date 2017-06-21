@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        button{
+            font-size:30px;
+        }
+    a{
+        font-size:30px;
+    }
+    </style>
+
+</head>
+<body>
+
+
+<button  onclick="hideMenu()">hideMenu</button>
+<br>
+
+<button  onclick="showMenu()">showMenu</button>
+<br>
+
+<button  onclick="setTitle()">setTitle</button>
+
+<br>
+
+<button  onclick="setShare()">setShare</button>
+
+<br>
+
+<button  onclick="share()">share</button>
+
+<br>
+
+<button  onclick="showNativePage()">CardDetail</button>
+
+<br>
+
+<button  onclick="setUserInfo()">UserInfo</button>
+<br>
+<br>
+
+<br>
+
+
+<a href="kakatrip://cardDetail?cardId=3"  >login</a>
+
+<script>
+    
+    
+    function showNativePage() {
+        
+        KaKaTripApp.showNativePage({pageName:'login',fromClassName:'web'});
+    }
+
+    function hideMenu(){
+        
+        KaKaTripApp.hideMenu();
+    }
+
+    function showMenu(){
+        
+        KaKaTripApp.showMenu();
+    }
+
+    function setTitle()
+    {
+        KaKaTripApp.setTitle({title:'webTitle'});
+    }
+
+    function setShare()
+    {
+        KaKaTripApp.setShare({title:'1111',content:'2222',link:'http://www.baidu.com',image:''});
+    }
+
+    function share()
+    {
+        KaKaTripApp.share({title:'1111',content:'2222',link:'http://www.baidu.com',image:''});
+    }
+
+    function setUserInfo()
+    {
+        KaKaTripApp.setUserInfo({token:'1111',mobile:'1234567'});
+    }
+
+    KaKaTripApp.hideCloseButton();
+
+
+</script>
+
+
+
+</body>
+
+</html>

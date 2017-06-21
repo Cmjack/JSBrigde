@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "BTViewController.h"
+#import "ImageViewController.h"
 
 @interface ViewController ()
 
@@ -17,12 +19,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.navigationItem.title = @"KaKa";
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)onPushButtonAction:(id)sender {
+    
+    ImageViewController *vc = [[ImageViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

@@ -7,16 +7,29 @@
 //
 
 #import "AppDelegate.h"
+#import <FLEXManager.h>
 
 @interface AppDelegate ()
+@property(nonatomic, strong)UILongPressGestureRecognizer *tap;
 
 @end
 
+@interface AppDelegate (FLEX)
+
+
+- (void)setupFLEX;
+
+@end
+
+
+
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
     // Override point for customization after application launch.
+    [self setupFLEX];
+    
     return YES;
 }
 
@@ -46,6 +59,31 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+@end
+
+@implementation AppDelegate (FLEX)
+
+- (void)setupFLEX
+{
+    self.tap  = [[UILongPressGestureRecognizer alloc]initWithTarget:self
+                                                             action:@selector(handleSixFingerQuadrupleTap:)];
+    self.tap.minimumPressDuration = 3;
+    [self.window addGestureRecognizer:self.tap];
+}
+
+
+- (void)handleSixFingerQuadrupleTap:(UILongPressGestureRecognizer *)tapRecognizer
+{
+    
+    if (tapRecognizer.state == UIGestureRecognizerStateRecognized) {
+        // This could also live in a handler for a keyboard shortcut, debug menu item, etc.
+        [[FLEXManager sharedManager] showExplorer];
+    }
+    
+}
+
 
 
 @end
