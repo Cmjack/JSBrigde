@@ -1,0 +1,32 @@
+PODS:
+  - FLAnimatedImage (1.0.12)
+  - FLEX (2.4.0)
+  - KKProgressHUD (0.0.5):
+    - MBProgressHUD
+  - KKRouter (0.0.2)
+  - MBProgressHUD (1.0.0)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
+  - SDWebImage/GIF (4.0.0):
+    - FLAnimatedImage (~> 1.0)
+    - SDWebImage/Core
+
+DEPENDENCIES:
+  - FLEX
+  - KKProgressHUD
+  - KKRouter
+  - SDWebImage
+  - SDWebImage/GIF
+
+SPEC CHECKSUMS:
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
+  KKProgressHUD: 938c2a54399a4bc8e0ef4d0da2a41aca34d07e8a
+  KKRouter: cf78b361db04c0a6736e61478d4387c6563286b7
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+
+PODFILE CHECKSUM: 76647ac1c3da0df5af2b303d8c531e2f24761e3d
+
+COCOAPODS: 1.2.1

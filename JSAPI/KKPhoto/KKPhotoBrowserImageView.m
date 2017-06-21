@@ -8,11 +8,15 @@
 
 #import "KKPhotoBrowserImageView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <SDWebImage/UIImage+GIF.h>
+#import <SDWebImage/UIImage+MultiFormat.h>
+#import <FLAnimatedImageView.h>
+#import <SDWebImage/FLAnimatedImageView+WebCache.h>
 
 @interface KKPhotoBrowserImageView ()<UIScrollViewDelegate>
 
 @property(nonatomic,strong)UIScrollView*scrollView;
-@property(nonatomic,strong)UIImageView*imageView;
+@property(nonatomic,strong)FLAnimatedImageView*imageView;
 
 @end
 
@@ -47,24 +51,54 @@
         CGFloat height = _imageView.image.size.height/2;
         
         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-        if (width>screenWidth)
-        {
-            height = height*screenWidth/width;
-            width = screenWidth;
-        }
+//        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+//        if (width>screenWidth)
+//        {
+// 
+//        }
+        height = height*screenWidth/width;
+        width = screenWidth;
         
-        if (height>screenHeight)
-        {
-            width = width*screenHeight/height;
-            height = screenWidth;
-        }
+//        if (height>screenHeight)
+//        {
+//            width = width*screenHeight/height;
+//            height = screenWidth;
+//        }
         
         _imageView.bounds = CGRectMake(0, 0, width,height);
         _imageView.center = self.scrollView.center;
+        [self.scrollView setContentSize:_imageView.bounds.size];
+        if (_imageView.frame.origin.y<0) {
+            CGRect rect = _imageView.frame;
+            rect.origin.y=0;
+            _imageView.frame = rect;
+        }
     }
 }
 
+#pragma mark - GestureRecognizer
+
+- (void)onSingleTap:(UITapGestureRecognizer*)ges
+{
+    
+}
+
+- (void)onDoubleTap:(UITapGestureRecognizer*)ges
+{
+    if (self.scrollView.zoomScale == 1.0) {
+        
+        [self.scrollView setZoomScale:2.0 animated:YES];
+        
+    }else
+    {
+        [self.scrollView setZoomScale:1.0 animated:YES];
+    }
+}
+
+- (void)onLongPress:(UILongPressGestureRecognizer*)ges
+{
+    
+}
 
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
@@ -85,7 +119,6 @@
         offsetY = (scrollView.bounds.size.height- scrollView.contentSize.height)/2;
     }
     _imageView.center=CGPointMake(scrollView.contentSize.width/2+offsetX,scrollView.contentSize.height/2+offsetY);
-//    _imageView.center = self.scrollView.center;
 
 }
 
@@ -99,24 +132,21 @@
 {
     __weak KKPhotoBrowserImageView *imageViewWeak = self;
     
-    // 如果下载失败下次继续下载---取消黑名单
-    // 下载图片回调进度
-    
-    [self.imageView sd_setImageWithURL:url
-                      placeholderImage:placeholder
-                             completed:^(UIImage * _Nullable image,
-                                         NSError * _Nullable error,
-                                         SDImageCacheType cacheType,
-                                         NSURL * _Nullable imageURL) {
-                                 
-                                 if (!error) {
-                                    
-                                     imageViewWeak.imageView.image = image;
-                                     [self setNeedsLayout];
-                                 }
-                                 
+    if (url) {
+
+        [self.imageView sd_setImageWithURL:url placeholderImage:placeholder options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+            
+        } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            
+            [imageViewWeak setNeedsLayout];
+        }];
         
-    }];
+    }else
+    {
+        self.imageView.image = placeholder;
+        [self setNeedsLayout];
+    }
+
 }
 
 
@@ -124,6 +154,27 @@
 {
     [self addSubview:self.scrollView];
     [self.scrollView addSubview:self.imageView];
+    
+    
+    // 单击图片
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSingleTap:)];
+
+
+    // 双击放大图片
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onDoubleTap:)];
+
+    // 长按保存图片
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+
+    doubleTap.numberOfTapsRequired = 2;
+
+    //        如果doubleTapGesture识别出双击事件，则singleTapGesture不会有任何动作。   也就是为了避免冲突
+    [singleTap requireGestureRecognizerToFail:doubleTap];
+
+    [self addGestureRecognizer:singleTap];
+    [self addGestureRecognizer:doubleTap];
+    [self addGestureRecognizer:longPress];
+    
 }
 
 - (UIScrollView *)scrollView
@@ -133,7 +184,7 @@
         _scrollView = [[UIScrollView alloc]initWithFrame:self.bounds];
         _scrollView.delegate = self;
         _scrollView.minimumZoomScale = 1.0;
-        _scrollView.maximumZoomScale = 5.0;
+        _scrollView.maximumZoomScale = 2.0;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         
@@ -141,11 +192,11 @@
     return _scrollView;
 }
 
-- (UIImageView *)imageView
+- (FLAnimatedImageView *)imageView
 {
     if (!_imageView) {
         
-        _imageView = [[UIImageView alloc]init];
+        _imageView = [[FLAnimatedImageView alloc]init];
         _imageView.tag = 11;
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
     }

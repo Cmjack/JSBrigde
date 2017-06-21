@@ -15,6 +15,7 @@
 @interface KKPhotoBrowser ()<UIScrollViewDelegate>
 
 @property(nonatomic,strong)UIScrollView *scrollView;
+@property(nonatomic,assign)CGPoint beginContentOffset;
 
 @end
 
@@ -26,7 +27,6 @@
     if (self) {
         // 背景颜色
         self.backgroundColor = [UIColor blackColor];
-        self.imageCount = 2;
     }
     return self;
 }
@@ -65,6 +65,7 @@
 //    
 //    _pageControll.center = CGPointMake(self.bounds.size.width * 0.5, self.bounds
 //                                       .size.height - 50);
+    _scrollView.contentOffset = CGPointMake(self.currentImageIndex * _scrollView.frame.size.width, 0);
     
 }
 
@@ -78,46 +79,31 @@
     _scrollView.pagingEnabled = YES;
     [self addSubview:_scrollView];
     
-    
-    
     for (int i = 0; i < self.imageCount; i++) {
         
         // 在ScrollView上添加图片
         KKPhotoBrowserImageView *imageView = [[KKPhotoBrowserImageView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
-        // 图片的Tag
         imageView.tag = i;
-        [imageView setImageWithURL:[NSURL URLWithString:@"http://ww4.sinaimg.cn/bmiddle/6a15cf5aly1fewww17l6rj20qo0yatfc.jpg"] placeholderImage:nil];
-
-        // 单击图片
-//        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoClick:)];
-//        
-//        
-//        // 双击放大图片
-//        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewDoubleTaped:)];
-//        
-//        // 长按保存图片
-//        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewLongPressAction:)];
-//        
-//        doubleTap.numberOfTapsRequired = 2;
-//        
-//        //        如果doubleTapGesture识别出双击事件，则singleTapGesture不会有任何动作。   也就是为了避免冲突
-//        [singleTap requireGestureRecognizerToFail:doubleTap];
-//        
-//        
-//        
-//        [imageView addGestureRecognizer:singleTap];
-//        [imageView addGestureRecognizer:doubleTap];
-//        [imageView addGestureRecognizer:longPress];
         [_scrollView addSubview:imageView];
     }
-
-    
+    [self preloadImageOfImageViewForIndex:_currentImageIndex];
 }
 
 
-- (void)preloaderImageOfImageViewForIndex:(NSInteger)index
+- (void)preloadImageOfImageViewForIndex:(NSInteger)index
 {
+    if (index<0||index>_scrollView.subviews.count-1)
+    {
+        return;
+    }
+    KKPhotoBrowserImageView *imageView = _scrollView.subviews[index];
+    if (imageView.preload) {
+        
+        return;
+    }
+    
     NSURL *url = nil;
+    UIImage *image = nil;
     
     if ([self.delegate respondsToSelector:@selector(photoBrowser:highQualityImageURLForIndex:)]) {
         
@@ -127,25 +113,79 @@
     
     if ([self.delegate respondsToSelector:@selector(photoBrowser:placeholderImageForIndex:)]) {
         
-        
+        image = [self.delegate photoBrowser:self placeholderImageForIndex:index];
     }
+    
+    [imageView setImageWithURL:url placeholderImage:image];
+    imageView.preload = YES;
     
 }
 
+// 展示第一张图片
+- (void)showFirstImage
+{
+    
+//    UIView *sourceView = nil;
+//    
+//    //
+//    if ([self.sourceImagesContainerView isKindOfClass:UICollectionView.class]) {
+//        UICollectionView *view = (UICollectionView *)self.sourceImagesContainerView;
+//        NSIndexPath *path = [NSIndexPath indexPathForItem:self.currentImageIndex inSection:0];
+//        sourceView = [view cellForItemAtIndexPath:path];
+//    }else {
+//        
+//        
+//        
+//        sourceView = self.sourceImagesContainerView.subviews[self.currentImageIndex];
+//        
+//    }
+//    
+//    
+//    CGRect rect = [self.sourceImagesContainerView convertRect:sourceView.frame toView:self];
+//    
+//    UIImageView *tempView = [[UIImageView alloc] init];
+//    tempView.image = [self placeholderImageForIndex:self.currentImageIndex];
+//    
+//    [self addSubview:tempView];
+//    
+//    CGRect targetTemp = [_scrollView.subviews[self.currentImageIndex] bounds];
+//    
+//    tempView.frame = rect;
+//    tempView.contentMode = [_scrollView.subviews[self.currentImageIndex] contentMode];
+//    _scrollView.hidden = YES;
+    
+//    [UIView animateWithDuration:0.4 animations:^{
+//        tempView.center = self.center;
+//        tempView.bounds = (CGRect){CGPointZero, targetTemp.size};
+//    } completion:^(BOOL finished) {
+//        _hasShowedFistView = YES;
+//        [tempView removeFromSuperview];
+//        _scrollView.hidden = NO;
+//    }];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    _beginContentOffset = scrollView.contentOffset;
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    _currentImageIndex = (scrollView.contentOffset.x) / _scrollView.bounds.size.width;
+    NSLog(@"%@",@(_currentImageIndex));
+}
 #pragma mark - scrollview代理方法
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     NSLog(@"%@",scrollView);
+    if (scrollView.contentOffset.x>_beginContentOffset.x) {
+        
+        [self preloadImageOfImageViewForIndex:_currentImageIndex+1];
+
+    }else
+    {
+        [self preloadImageOfImageViewForIndex:_currentImageIndex-1];
+    }
     
-    int index = (scrollView.contentOffset.x + _scrollView.bounds.size.width * 0.5) / _scrollView.bounds.size.width;
-    
-    
-    
-//    if (!_willDisappear) {
-//        _pageControll.currentPage = index;
-//    }
-    // 拖动后展示下一张图片
-//    [self setupImageOfImageViewForIndex:index];
 }
 
 
