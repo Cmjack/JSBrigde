@@ -6,12 +6,12 @@
 //  Copyright © 2017年 CaiMing. All rights reserved.
 //
 
-#import "KKWebViewController+Device.h"
+#import "KKWKWebViewController+Device.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <KKProgressHUD/KKProgressHUD.h>
 #import "KKReachability.h"
 
-@implementation KKWebViewController (Device)
+@implementation KKWKWebViewController (Device)
 
 #pragma mark -sys alert
 
@@ -38,7 +38,6 @@
         UIAlertAction *action = [UIAlertAction actionWithTitle:buttonLabel
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
-                                                           // todo
                                                            NSMutableDictionary *param = @{}.mutableCopy;
                                                            [param setObject:@([buttonLabels indexOfObject:buttonLabel]) forKey:@"buttonIndex"];
                                                            [self callJS:@"showConfirm" param:param];
@@ -166,12 +165,11 @@
     switch ([reach currentReachabilityStatus]) {
             case NotReachable:// 没有网络
         {
-            
             netconnType = @"no network";
         }
             break;
-            
-            case ReachableViaWiFi:// Wifi
+
+        case ReachableViaWiFi:// Wifi
         {
             netconnType = @"Wifi";
         }
@@ -214,16 +212,7 @@
 {
     NSString *app = param[@"app"];
     NSURL *url = [NSURL URLWithString:app];
-    
-    if ([[UIApplication sharedApplication]canOpenURL:url])
-    {
-        [[UIApplication sharedApplication]openURL:url];
-        
-    }else
-    {
-        [self callJS:@"launchApp" param:@{@"success":@0}];
-    }
-
+    [[UIApplication sharedApplication]openURL:url];
 }
 
 @end

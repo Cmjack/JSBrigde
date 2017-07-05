@@ -9,6 +9,7 @@
 #import "KKWebViewController.h"
 #import "KKWebViewBridge.h"
 #import <KKRouter/KKRouter.h>
+#import "KKWebViewController+Device.h"
 
 
 
@@ -42,10 +43,16 @@
 {
 
 }
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.webView removeUserScript];
+    [super viewWillDisappear:animated];
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self.webView installUserScript:nil];
 }
 
 - (void)viewWillLayoutSubviews
@@ -97,7 +104,7 @@
     return [self createImageWithColor:color withSize:CGSizeMake(1, 1)];
 }
 
-- (UIImage *) createImageWithColor:(UIColor *)color withSize:(CGSize)size
+- (UIImage *)createImageWithColor:(UIColor *)color withSize:(CGSize)size
 {
     CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
     UIGraphicsBeginImageContext(rect.size);
@@ -112,7 +119,23 @@
 
 - (void)callJS:(NSString*)method param:(NSDictionary*)param
 {
-    
+    NSMutableDictionary *md = @{}.mutableCopy;
+    [md setObject:method forKey:@"action"];
+    [md setObject:param forKey:@"param"];
+    NSString *jsStr = [NSString stringWithFormat:@"callJS(%@)",[self jsonStringFromData:md]];
+    [self.webView.webView evaluateJavaScript:jsStr completionHandler:nil];
+}
+
+-(NSString *)jsonStringFromData:(id)data
+{
+    if (!data) {
+        return nil;
+    }
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    return [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
 
@@ -176,8 +199,22 @@
 {
     NSString *methodName = message.name;
     NSDictionary *param = message.body;
+    NSString *action = param[@"action"];
     NSLog(@"%@",methodName);
     NSLog(@"%@",param);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored"-Warc-performSelector-leaks"
+
+    if ([self respondsToSelector:NSSelectorFromString(action)])
+    {
+        [self performSelector:NSSelectorFromString(action) withObject:param[@"param"]];
+        
+    }else if ([self respondsToSelector:NSSelectorFromString([NSString stringWithFormat:@"%@:",action])])
+    {
+        [self performSelector:NSSelectorFromString([NSString stringWithFormat:@"%@:",action]) withObject:param[@"param"]];
+    }
+#pragma clang diagnostic pop
+
 }
 
 - (void)kkWebvView:(KKWebViewBridge *)kkWebView webViewTitle:(NSString *)title
@@ -237,9 +274,6 @@
 
 @end
 
-//@interface KKWebViewController (Navigation)
-//
-//@end
 
 @implementation KKWebViewController (Navigation)
 

@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "BTViewController.h"
 #import "ImageViewController.h"
+#import "BIZViewController.h"
 
 @interface ViewController ()
 
@@ -30,7 +30,7 @@
 
 - (IBAction)onPushButtonAction:(id)sender {
     
-    ImageViewController *vc = [[ImageViewController alloc]init];
+    BIZViewController *vc = [[BIZViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

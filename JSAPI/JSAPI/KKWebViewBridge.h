@@ -30,25 +30,27 @@
 @property(nonatomic, readonly)WKWebView *webView;
 @property(nonatomic,copy)NSURL *url;
 @property (nonatomic, readonly) BOOL canGoBack;
+@property(nonatomic, strong) NSArray *loadJSBridge;
+@property(nonatomic, strong) NSString *JSBridgeConfig;
+
 
 - (void)goBack;
 - (void)setProgressColor:(UIColor*)color;
-- (void)installUserScript;
+- (void)installUserScript:(NSString*)js;
 - (void)removeUserScript;
-
 - (void)reload;
 
 @end
 
-@interface KKScriptMessage : NSObject
-/*! @abstract The body of the message.
- @discussion Allowed types are NSNumber, NSString, NSDate, NSArray,
- NSDictionary, and NSNull.
- */
-@property (nonatomic, readonly, copy) id body;
-
-/*! @abstract The name of the message handler to which the message is sent.
- */
-@property (nonatomic, readonly, copy) NSString *name;
-
-@end
+//@interface KKScriptMessage : NSObject
+///*! @abstract The body of the message.
+// @discussion Allowed types are NSNumber, NSString, NSDate, NSArray,
+// NSDictionary, and NSNull.
+// */
+//@property (nonatomic, readonly, copy) id body;
+//
+///*! @abstract The name of the message handler to which the message is sent.
+// */
+//@property (nonatomic, readonly, copy) NSString *name;
+//
+//@end

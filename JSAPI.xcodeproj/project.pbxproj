@@ -8,18 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		3F1B18551EF7AF8700F93284 /* KKReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B18541EF7AF8700F93284 /* KKReachability.m */; };
-		3F1B18581EF7B06400F93284 /* KKWebViewBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B18571EF7B06400F93284 /* KKWebViewBridge.m */; };
-		3F1B185B1EF7B15A00F93284 /* KKWebViewController+Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B185A1EF7B15A00F93284 /* KKWebViewController+Device.m */; };
 		3F1B185E1EF8BC4200F93284 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B185D1EF8BC4200F93284 /* ImageViewController.m */; };
+		3F2107B11F0CD761003A4DA3 /* BIZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2107B01F0CD761003A4DA3 /* BIZViewController.m */; };
+		3F2107B21F0CE5AA003A4DA3 /* KKWKWebViewController+Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B185A1EF7B15A00F93284 /* KKWKWebViewController+Device.m */; };
+		3F455E131F0A1042008E8BA0 /* api_test.html in Resources */ = {isa = PBXBuildFile; fileRef = 3F455E121F0A1042008E8BA0 /* api_test.html */; };
+		3F455E161F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F455E151F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.m */; };
+		3F455E191F0C9D38008E8BA0 /* WKUserContentController+KKUserScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F455E181F0C9D38008E8BA0 /* WKUserContentController+KKUserScript.m */; };
+		3F455E1C1F0CB92D008E8BA0 /* KKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F455E1B1F0CB92D008E8BA0 /* KKWebView.m */; };
+		3F455E1F1F0CC1C4008E8BA0 /* KKWKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F455E1E1F0CC1C4008E8BA0 /* KKWKWebViewController.m */; };
 		3F66FEAF1EF3883D0069EB3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F66FEAE1EF3883D0069EB3E /* main.m */; };
 		3F66FEB21EF3883D0069EB3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F66FEB11EF3883D0069EB3E /* AppDelegate.m */; };
 		3F66FEB51EF3883D0069EB3E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F66FEB41EF3883D0069EB3E /* ViewController.m */; };
 		3F66FEB81EF3883D0069EB3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F66FEB61EF3883D0069EB3E /* Main.storyboard */; };
 		3F66FEBA1EF3883D0069EB3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F66FEB91EF3883D0069EB3E /* Assets.xcassets */; };
-		3F66FEC71EF38A020069EB3E /* KKWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F66FEC61EF38A020069EB3E /* KKWebViewController.m */; };
-		3F66FED21EF3B04F0069EB3E /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 3F66FED11EF3B04F0069EB3E /* index.html */; };
-		3F66FED41EF3B05C0069EB3E /* KaKaTripJSBridge.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F66FED31EF3B05C0069EB3E /* KaKaTripJSBridge.js */; };
-		3F66FED71EF3B3720069EB3E /* BTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F66FED61EF3B3720069EB3E /* BTViewController.m */; };
+		3F66FED41EF3B05C0069EB3E /* KaKaJSBridge.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F66FED31EF3B05C0069EB3E /* KaKaJSBridge.js */; };
 		3F66FEDA1EF3B4E70069EB3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F66FED81EF3B4E70069EB3E /* LaunchScreen.storyboard */; };
 		3FCAD8871EF8FA0B00C240D1 /* KKPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCAD8861EF8FA0B00C240D1 /* KKPhotoBrowser.m */; };
 		3FCAD88B1EF8FB9C00C240D1 /* KKPhotoBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCAD88A1EF8FB9C00C240D1 /* KKPhotoBrowserImageView.m */; };
@@ -32,10 +34,21 @@
 		3F1B18541EF7AF8700F93284 /* KKReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKReachability.m; sourceTree = "<group>"; };
 		3F1B18561EF7B06400F93284 /* KKWebViewBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKWebViewBridge.h; sourceTree = "<group>"; };
 		3F1B18571EF7B06400F93284 /* KKWebViewBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKWebViewBridge.m; sourceTree = "<group>"; };
-		3F1B18591EF7B15A00F93284 /* KKWebViewController+Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KKWebViewController+Device.h"; sourceTree = "<group>"; };
-		3F1B185A1EF7B15A00F93284 /* KKWebViewController+Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KKWebViewController+Device.m"; sourceTree = "<group>"; };
+		3F1B18591EF7B15A00F93284 /* KKWKWebViewController+Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KKWKWebViewController+Device.h"; sourceTree = "<group>"; };
+		3F1B185A1EF7B15A00F93284 /* KKWKWebViewController+Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KKWKWebViewController+Device.m"; sourceTree = "<group>"; };
 		3F1B185C1EF8BC4200F93284 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		3F1B185D1EF8BC4200F93284 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		3F2107AF1F0CD761003A4DA3 /* BIZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIZViewController.h; sourceTree = "<group>"; };
+		3F2107B01F0CD761003A4DA3 /* BIZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIZViewController.m; sourceTree = "<group>"; };
+		3F455E121F0A1042008E8BA0 /* api_test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = api_test.html; sourceTree = "<group>"; };
+		3F455E141F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKJSBridgeConfigInfo.h; sourceTree = "<group>"; };
+		3F455E151F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKJSBridgeConfigInfo.m; sourceTree = "<group>"; };
+		3F455E171F0C9D38008E8BA0 /* WKUserContentController+KKUserScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKUserContentController+KKUserScript.h"; sourceTree = "<group>"; };
+		3F455E181F0C9D38008E8BA0 /* WKUserContentController+KKUserScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKUserContentController+KKUserScript.m"; sourceTree = "<group>"; };
+		3F455E1A1F0CB92D008E8BA0 /* KKWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKWebView.h; sourceTree = "<group>"; };
+		3F455E1B1F0CB92D008E8BA0 /* KKWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKWebView.m; sourceTree = "<group>"; };
+		3F455E1D1F0CC1C4008E8BA0 /* KKWKWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKWKWebViewController.h; sourceTree = "<group>"; };
+		3F455E1E1F0CC1C4008E8BA0 /* KKWKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKWKWebViewController.m; sourceTree = "<group>"; };
 		3F66FEAA1EF3883D0069EB3E /* JSAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F66FEAE1EF3883D0069EB3E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3F66FEB01EF3883D0069EB3E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -45,12 +58,7 @@
 		3F66FEB71EF3883D0069EB3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F66FEB91EF3883D0069EB3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F66FEBE1EF3883D0069EB3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F66FEC51EF38A020069EB3E /* KKWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKWebViewController.h; sourceTree = "<group>"; };
-		3F66FEC61EF38A020069EB3E /* KKWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKWebViewController.m; sourceTree = "<group>"; };
-		3F66FED11EF3B04F0069EB3E /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		3F66FED31EF3B05C0069EB3E /* KaKaTripJSBridge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = KaKaTripJSBridge.js; sourceTree = "<group>"; };
-		3F66FED51EF3B3720069EB3E /* BTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTViewController.h; sourceTree = "<group>"; };
-		3F66FED61EF3B3720069EB3E /* BTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTViewController.m; sourceTree = "<group>"; };
+		3F66FED31EF3B05C0069EB3E /* KaKaJSBridge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = KaKaJSBridge.js; sourceTree = "<group>"; };
 		3F66FED91EF3B4E70069EB3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FCAD8851EF8FA0B00C240D1 /* KKPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKPhotoBrowser.h; path = JSAPI/KKPhotoBrowser.h; sourceTree = SOURCE_ROOT; };
 		3FCAD8861EF8FA0B00C240D1 /* KKPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKPhotoBrowser.m; path = JSAPI/KKPhotoBrowser.m; sourceTree = SOURCE_ROOT; };
@@ -97,12 +105,11 @@
 				3F66FEB11EF3883D0069EB3E /* AppDelegate.m */,
 				3F66FEB31EF3883D0069EB3E /* ViewController.h */,
 				3F66FEB41EF3883D0069EB3E /* ViewController.m */,
+				3F2107AF1F0CD761003A4DA3 /* BIZViewController.h */,
+				3F2107B01F0CD761003A4DA3 /* BIZViewController.m */,
 				3FCAD8881EF8FB6700C240D1 /* KKPhoto */,
 				3F1B185C1EF8BC4200F93284 /* ImageViewController.h */,
 				3F1B185D1EF8BC4200F93284 /* ImageViewController.m */,
-				3F66FED51EF3B3720069EB3E /* BTViewController.h */,
-				3F66FED61EF3B3720069EB3E /* BTViewController.m */,
-				3F66FED11EF3B04F0069EB3E /* index.html */,
 				3F66FEC41EF388EC0069EB3E /* JSAPI */,
 				3F66FEB61EF3883D0069EB3E /* Main.storyboard */,
 				3F66FED81EF3B4E70069EB3E /* LaunchScreen.storyboard */,
@@ -126,13 +133,20 @@
 			children = (
 				3F1B18531EF7AF8700F93284 /* KKReachability.h */,
 				3F1B18541EF7AF8700F93284 /* KKReachability.m */,
-				3F66FEC51EF38A020069EB3E /* KKWebViewController.h */,
-				3F66FEC61EF38A020069EB3E /* KKWebViewController.m */,
+				3F455E1D1F0CC1C4008E8BA0 /* KKWKWebViewController.h */,
+				3F455E1E1F0CC1C4008E8BA0 /* KKWKWebViewController.m */,
+				3F455E1A1F0CB92D008E8BA0 /* KKWebView.h */,
+				3F455E1B1F0CB92D008E8BA0 /* KKWebView.m */,
+				3F455E171F0C9D38008E8BA0 /* WKUserContentController+KKUserScript.h */,
+				3F455E181F0C9D38008E8BA0 /* WKUserContentController+KKUserScript.m */,
+				3F455E141F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.h */,
+				3F455E151F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.m */,
+				3F1B18591EF7B15A00F93284 /* KKWKWebViewController+Device.h */,
+				3F1B185A1EF7B15A00F93284 /* KKWKWebViewController+Device.m */,
 				3F1B18561EF7B06400F93284 /* KKWebViewBridge.h */,
 				3F1B18571EF7B06400F93284 /* KKWebViewBridge.m */,
-				3F1B18591EF7B15A00F93284 /* KKWebViewController+Device.h */,
-				3F1B185A1EF7B15A00F93284 /* KKWebViewController+Device.m */,
-				3F66FED31EF3B05C0069EB3E /* KaKaTripJSBridge.js */,
+				3F455E121F0A1042008E8BA0 /* api_test.html */,
+				3F66FED31EF3B05C0069EB3E /* KaKaJSBridge.js */,
 			);
 			path = JSAPI;
 			sourceTree = "<group>";
@@ -227,8 +241,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F66FED41EF3B05C0069EB3E /* KaKaTripJSBridge.js in Resources */,
-				3F66FED21EF3B04F0069EB3E /* index.html in Resources */,
+				3F66FED41EF3B05C0069EB3E /* KaKaJSBridge.js in Resources */,
+				3F455E131F0A1042008E8BA0 /* api_test.html in Resources */,
 				3F66FEBA1EF3883D0069EB3E /* Assets.xcassets in Resources */,
 				3F66FEDA1EF3B4E70069EB3E /* LaunchScreen.storyboard in Resources */,
 				3F66FEB81EF3883D0069EB3E /* Main.storyboard in Resources */,
@@ -290,17 +304,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F66FED71EF3B3720069EB3E /* BTViewController.m in Sources */,
 				3F66FEB51EF3883D0069EB3E /* ViewController.m in Sources */,
-				3F1B185B1EF7B15A00F93284 /* KKWebViewController+Device.m in Sources */,
+				3F455E1C1F0CB92D008E8BA0 /* KKWebView.m in Sources */,
 				3FCAD8871EF8FA0B00C240D1 /* KKPhotoBrowser.m in Sources */,
 				3F66FEB21EF3883D0069EB3E /* AppDelegate.m in Sources */,
 				3F66FEAF1EF3883D0069EB3E /* main.m in Sources */,
-				3F1B18581EF7B06400F93284 /* KKWebViewBridge.m in Sources */,
+				3F2107B11F0CD761003A4DA3 /* BIZViewController.m in Sources */,
+				3F2107B21F0CE5AA003A4DA3 /* KKWKWebViewController+Device.m in Sources */,
 				3F1B185E1EF8BC4200F93284 /* ImageViewController.m in Sources */,
 				3F1B18551EF7AF8700F93284 /* KKReachability.m in Sources */,
-				3F66FEC71EF38A020069EB3E /* KKWebViewController.m in Sources */,
+				3F455E1F1F0CC1C4008E8BA0 /* KKWKWebViewController.m in Sources */,
 				3FCAD88B1EF8FB9C00C240D1 /* KKPhotoBrowserImageView.m in Sources */,
+				3F455E191F0C9D38008E8BA0 /* WKUserContentController+KKUserScript.m in Sources */,
+				3F455E161F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

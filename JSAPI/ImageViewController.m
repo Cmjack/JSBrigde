@@ -40,9 +40,6 @@
     photo.currentImageIndex = 1;
     [photo show];
     
-    
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {

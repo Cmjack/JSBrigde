@@ -7,6 +7,7 @@
 //
 
 #import "KKWebViewBridge.h"
+
 //#import "NSURL+Scheme.h"
 //#import "AppConfig.h"
 
@@ -40,8 +41,6 @@ WKScriptMessageHandler>
 @property(nonatomic, strong) NSMutableURLRequest *request;
 @property(nonatomic, strong) WKUserContentController *userContentController;
 @property(nonatomic, strong) UIProgressView *progressView;
-@property(nonatomic, strong) NSArray *loadJSBridge;
-@property(nonatomic, strong) NSString *JSBridgeConfig;
 @property (nonatomic, readwrite) BOOL canGoBack;
 @property (nonatomic, assign) BOOL failure;
 
@@ -99,63 +98,61 @@ WKScriptMessageHandler>
 - (void)removeUserScript
 {
     [self.userContentController removeAllUserScripts];
-    [self.userContentController removeScriptMessageHandlerForName:@"KaKaTrip"];
-//    [[KKNetworkReachabilityManager share]removeDelegate:self];
+    [self.userContentController removeScriptMessageHandlerForName:@"KaKa"];
 }
 
-- (void)installUserScript
+- (void)installUserScript:(NSString*)js
 {
-//    [KKNetworkReachabilityManager share].delegate = self;
-//    if ([self isInstallScript]) {
-//        
-//        WKUserContentController *userController = self.userContentController;
-//        
-//        WKUserScript *script = [[WKUserScript alloc]initWithSource:[NSString stringWithFormat:@"KaKaTripApp = %@;",[self JSData]] injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:YES];
-//        [userController addUserScript:script];
-//        
-//        WKUserScript *bridgeScript = [[WKUserScript alloc]initWithSource:self.JSBridgeConfig
-//                                                           injectionTime:WKUserScriptInjectionTimeAtDocumentStart
-//                                                        forMainFrameOnly:YES];
-//        
-//        [userController addUserScript:bridgeScript];
-//        
-//        WKUserScript *initScript = [[WKUserScript alloc]initWithSource:@"KaKaTripApp.init();"
-//                                                         injectionTime:WKUserScriptInjectionTimeAtDocumentEnd
-//                                                      forMainFrameOnly:YES];
-//        
-//        [userController addUserScript:initScript];
-//        
-//        [userController addScriptMessageHandler:self name:@"KaKaTrip"];
-//    }
-//    
+    if ([self isInstallScript]) {
+        
+        WKUserContentController *userController = self.userContentController;
+        
+        WKUserScript *script = [[WKUserScript alloc]initWithSource:[NSString stringWithFormat:@"KaKaApp = %@;",[self JSData]] injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:YES];
+        [userController addUserScript:script];
+        
+        WKUserScript *bridgeScript = [[WKUserScript alloc]initWithSource:self.JSBridgeConfig
+                                                           injectionTime:WKUserScriptInjectionTimeAtDocumentStart
+                                                        forMainFrameOnly:YES];
+        
+        [userController addUserScript:bridgeScript];
+        
+        WKUserScript *initScript = [[WKUserScript alloc]initWithSource:@"KaKaApp.init();"
+                                                         injectionTime:WKUserScriptInjectionTimeAtDocumentEnd
+                                                      forMainFrameOnly:YES];
+        [userController addUserScript:initScript];
+        [userController addScriptMessageHandler:self name:@"KaKa"];
+    }
+    
 }
 
 - (BOOL)isInstallScript
 {
-
-    NSString *host = self.url.host;
-    
-    if (host) {
-        
-        for (NSString *domain in self.loadJSBridge)
-        {
-            NSRange range = [domain rangeOfString:host];
-            
-            if (range.length>0)
-            {
-                return YES;
-            }
-        }
-    }
-    
-    return NO;
+    return YES;
+//    
+//    NSString *host = self.url.host;
+//    
+//    if (host) {
+//        
+//        for (NSString *domain in self.loadJSBridge)
+//        {
+//            NSRange range = [domain rangeOfString:host];
+//            
+//            if (range.length>0)
+//            {
+//                return YES;
+//            }
+//        }
+//    }
+//    
+//    return NO;
 }
 
 
 - (void)setUrl:(NSURL *)url
 {
     _url = url;
-    [self.webView loadRequest:self.request];
+    [self testIndex];
+//    [self.webView loadRequest:self.request];
 }
 
 #pragma mark - WKNavigationDelegate
@@ -205,11 +202,11 @@ WKScriptMessageHandler>
 {
     
 //    BOOL isMainFrame = navigationAction.targetFrame.isMainFrame;
-//    NSURL *url = navigationAction.request.URL;
-//    NSString *scheme = url.scheme;
-//    
-//    if ([scheme isEqualToString:@"kakatrip"])
-//    {
+    NSURL *url = navigationAction.request.URL;
+    NSString *scheme = url.scheme;
+    
+    if ([scheme isEqualToString:@"kakatrip"])
+    {
 //        NSDictionary *dict = [url kakatripSchemeParam];
 //        
 //        if ([self.delegate respondsToSelector:@selector(kkWebvView:didReceiveScriptMessage:)])
@@ -219,11 +216,11 @@ WKScriptMessageHandler>
 //            kkScripeMessage.body = dict;
 //            [self.delegate kkWebvView:self didReceiveScriptMessage:kkScripeMessage];
 //        }
-//        decisionHandler(WKNavigationActionPolicyCancel);
-//        
-//    }else if ([scheme isEqualToString:@"https"]||[scheme isEqualToString:@"http"])
-//
-//    {
+        decisionHandler(WKNavigationActionPolicyCancel);
+        
+    }else if ([scheme isEqualToString:@"https"]||[scheme isEqualToString:@"http"])
+
+    {
 //        NSArray *domainWhiteList = [AppConfig share].domainWhiteList;
 //        NSString *host = url.host;
 //        
@@ -266,40 +263,42 @@ WKScriptMessageHandler>
 //        
 //        if (isMainFrame && !isAllow)
 //        {
-//            KKAlertView *alertView = [[KKAlertView alloc]init];
-//            KKAlertAction *action = [KKAlertAction alertActionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(KKAlertAction *action) {
-//                [[CMRouter sharedInstance]popViewController];
-//            }];
-//            KKAlertAction *action1 = [KKAlertAction alertActionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(KKAlertAction *action) {
-//                [[UIApplication sharedApplication]openURL:navigationAction.request.URL];
-//                [[CMRouter sharedInstance]popViewControllerWithAnimation:NO];
-//            }];
-//            
-//            [alertView showAlertActionViewWithTitle:@"是否打开第三方网站" actions:@[action,action1]];
+////            KKAlertView *alertView = [[KKAlertView alloc]init];
+////            KKAlertAction *action = [KKAlertAction alertActionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(KKAlertAction *action) {
+////                [[CMRouter sharedInstance]popViewController];
+////            }];
+////            KKAlertAction *action1 = [KKAlertAction alertActionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(KKAlertAction *action) {
+////                [[UIApplication sharedApplication]openURL:navigationAction.request.URL];
+////                [[CMRouter sharedInstance]popViewControllerWithAnimation:NO];
+////            }];
+////            
+////            [alertView showAlertActionViewWithTitle:@"是否打开第三方网站" actions:@[action,action1]];
 //        }
 //        
 //        decisionHandler(isAllow?WKNavigationActionPolicyAllow:WKNavigationActionPolicyCancel);
-//        
-//    }else if ([scheme isEqualToString:@"tel"])
-//    {
+        
+        decisionHandler(WKNavigationActionPolicyAllow);
+        
+    }else if ([scheme isEqualToString:@"tel"])
+    {
 //        [Mobile telephone:url.absoluteString];
 //        decisionHandler(WKNavigationActionPolicyCancel);
-//
-//    }else if ([scheme isEqualToString:@"sms:"])
-//    {
-//        UIApplication * app = [UIApplication sharedApplication];
-//        if ([app canOpenURL:url]) {
-//            [app openURL:url];
-//        }
-//        decisionHandler(WKNavigationActionPolicyCancel);
-//
-//    }
-//    else
-//    {
-//        decisionHandler(WKNavigationActionPolicyAllow);
-//    }
+
+    }else if ([scheme isEqualToString:@"sms:"])
+    {
+        UIApplication * app = [UIApplication sharedApplication];
+        if ([app canOpenURL:url]) {
+            [app openURL:url];
+        }
+        decisionHandler(WKNavigationActionPolicyCancel);
+
+    }
+    else
+    {
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
     
-    decisionHandler(WKNavigationActionPolicyAllow);
+//    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 - (nullable WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures
@@ -344,14 +343,14 @@ WKScriptMessageHandler>
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
 {
-//    
-//    if ([self.delegate respondsToSelector:@selector(kkWebvView:didReceiveScriptMessage:)])
-//    {
-//        KKScriptMessage *kkScripeMessage = [KKScriptMessage new];
-//        kkScripeMessage.name = message.name;
-//        kkScripeMessage.body = [NSObject dataFormJsonString:message.body];
-//        [self.delegate kkWebvView:self didReceiveScriptMessage:kkScripeMessage];
-//    }
+    
+    if ([self.delegate respondsToSelector:@selector(kkWebvView:didReceiveScriptMessage:)])
+    {
+        KKScriptMessage *kkScripeMessage = [KKScriptMessage new];
+        kkScripeMessage.name = message.name;
+        kkScripeMessage.body = [self dataFormJsonString:message.body];
+        [self.delegate kkWebvView:self didReceiveScriptMessage:kkScripeMessage];
+    }
 }
 
 
@@ -460,34 +459,21 @@ WKScriptMessageHandler>
 //    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
 }
 
-//- (NSString *)JSData
-//{
-//    NSString *token = [KeyChain getToken];
-//    if (token== nil) {
-//        token = @"";
-//    }
-//    NSMutableDictionary *dict = @{}.mutableCopy;
-//    [dict kk_safe_setObject:@"iPhone" forKey:@"platform"];
-//    [dict kk_safe_setObject:APP_SHORT_VERSION forKey:@"version"];
-//    [dict kk_safe_setObject:token forKey:@"token"];
-//    return [NSObject jsonStringFromData:dict];
-//}
+- (NSString *)JSData
+{
+    NSMutableDictionary *dict = @{}.mutableCopy;
+    [dict setObject:@"iPhone" forKey:@"platform"];
+    return [self jsonStringFromData:dict];
+}
 
 - (NSString *)JSBridgeConfig
 {
-//    NSString *jsString = [AppConfig share].JSBridgeConfig;
-//
-//    if (jsString) {
-//        
-//        _JSBridgeConfig = jsString;
-//    }
-//    
-//    if (_JSBridgeConfig == nil) {
-//
-//        NSString *path = [[NSBundle mainBundle]pathForResource:@"KaKaTripJSBridge" ofType:@"js"];
-//
-//        _JSBridgeConfig = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-//    }
+    
+    if (_JSBridgeConfig == nil) {
+
+        NSString *path = [[NSBundle mainBundle]pathForResource:@"KaKaJSBridge" ofType:@"js"];
+        _JSBridgeConfig = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    }
 
     return _JSBridgeConfig;
 }
@@ -555,43 +541,39 @@ WKScriptMessageHandler>
 - (void)testIndex
 {
     //调用逻辑
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"api_test" ofType:@"html"];
     if(path){
         if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
             // iOS9. One year later things are OK.
             NSURL *fileURL = [NSURL fileURLWithPath:path];
             [self.webView loadFileURL:fileURL allowingReadAccessToURL:fileURL];
         } else {
-            // iOS8. Things can be workaround-ed
-            //   Brave people can do just this
-            //   fileURL = try! pathForBuggyWKWebView8(fileURL)
-            //   webView.loadRequest(NSURLRequest(URL: fileURL))
             
-//            NSURL *fileURL = [self fileURLForBuggyWKWebView8:[NSURL fileURLWithPath:path]];
-//            NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
-//            [self.webView loadRequest:request];
+            NSURL *fileURL = [self fileURLForBuggyWKWebView8:[NSURL fileURLWithPath:path]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:fileURL];
+            [self.webView loadRequest:request];
         }
     }
 }
-//
-////将文件copy到tmp目录
-//- (NSURL *)fileURLForBuggyWKWebView8:(NSURL *)fileURL {
-//    NSError *error = nil;
-//    if (!fileURL.fileURL || ![fileURL checkResourceIsReachableAndReturnError:&error]) {
-//        return nil;
-//    }
-//    // Create "/temp/www" directory
-//    NSFileManager *fileManager= [NSFileManager defaultManager];
-//    NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:@"www"];
-//    [fileManager createDirectoryAtURL:temDirURL withIntermediateDirectories:YES attributes:nil error:&error];
-//    
-//    NSURL *dstURL = [temDirURL URLByAppendingPathComponent:fileURL.lastPathComponent];
-//    // Now copy given file to the temp directory
-//    [fileManager removeItemAtURL:dstURL error:&error];
-//    [fileManager copyItemAtURL:fileURL toURL:dstURL error:&error];
-//    // Files in "/temp/www" load flawlesly :)
-//    return dstURL;
-//}
+
+//将文件copy到tmp目录
+- (NSURL *)fileURLForBuggyWKWebView8:(NSURL *)fileURL {
+    NSError *error = nil;
+    if (!fileURL.fileURL || ![fileURL checkResourceIsReachableAndReturnError:&error]) {
+        return nil;
+    }
+    // Create "/temp/www" directory
+    NSFileManager *fileManager= [NSFileManager defaultManager];
+    NSURL *temDirURL = [[NSURL fileURLWithPath:NSTemporaryDirectory()] URLByAppendingPathComponent:@"www"];
+    [fileManager createDirectoryAtURL:temDirURL withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    NSURL *dstURL = [temDirURL URLByAppendingPathComponent:fileURL.lastPathComponent];
+    // Now copy given file to the temp directory
+    [fileManager removeItemAtURL:dstURL error:&error];
+    [fileManager copyItemAtURL:fileURL toURL:dstURL error:&error];
+    // Files in "/temp/www" load flawlesly :)
+    return dstURL;
+}
 
 //static char imgUrlArrayKey;
 //
@@ -722,7 +704,7 @@ WKScriptMessageHandler>
 //    return YES;
 //    
 //}
-
+//
 ////在WKWebview协议中调用上面两个类别的方法
 //
 //// 类似 UIWebView 的 －webViewDidFinishLoad:
@@ -752,5 +734,31 @@ WKScriptMessageHandler>
 //    decisionHandler(WKNavigationActionPolicyAllow);
 //    
 //}
+
+
+-(id)dataFormJsonString:(NSString *)jsonString
+{
+    if (!jsonString) {
+        return nil;
+    }
+    id jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:NSJSONReadingAllowFragments
+                                                      error:&error];
+    return jsonObject;
+}
+
+-(NSString *)jsonStringFromData:(id)data
+{
+    if (!data) {
+        return nil;
+    }
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    return [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
 
 @end
