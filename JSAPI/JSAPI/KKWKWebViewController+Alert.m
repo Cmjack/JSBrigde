@@ -129,12 +129,10 @@
         NSMutableDictionary *param = @{}.mutableCopy;
         [param setObject:@(index) forKey:@"buttonIndex"];
         [param setObject:timeValue forKey:@"date"];
-        
         [self callJS:@"datePicker" param:param];
 
     };
-    
-    [[UIApplication sharedApplication].keyWindow addSubview:datepicker];
+    [datepicker show];
 }
 
 - (void)timePicker:(NSDictionary*)param
@@ -147,12 +145,9 @@
         NSMutableDictionary *param = @{}.mutableCopy;
         [param setObject:@(index) forKey:@"buttonIndex"];
         [param setObject:timeValue forKey:@"date"];
-        
         [self callJS:@"timePicker" param:param];
-        
     };
-    
-    [[UIApplication sharedApplication].keyWindow addSubview:datepicker];
+    [datepicker show];
 }
 
 

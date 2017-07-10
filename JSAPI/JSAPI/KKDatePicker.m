@@ -10,6 +10,7 @@
 #define SCREENHRIGHT [UIScreen mainScreen].bounds.size.height
 
 #import "KKDatePicker.h"
+
 @interface KKDatePicker ()
 @property(nonatomic,strong)UIDatePicker * datePick;
 @property(nonatomic,assign)UIDatePickerMode  pickerModel;
@@ -21,14 +22,21 @@
 @end
 
 @implementation KKDatePicker
--(instancetype)initWithFrame:(CGRect)frame{
+-(instancetype)initWithFrame:(CGRect)frame
+{
     if (self = [super initWithFrame:frame]) {
         [self initSubview];
         [self setBackgroundColor:[UIColor colorWithRed:1/255.f green:1/255.f blue:1/255.f alpha:0.5]];
     }
-    
     return self;
 }
+
+-(void)initSubview{
+    
+    _timeValue = @"";
+    [self addSubview:self.bgView];
+}
+
 
 -(void)reloadDate:(NSString *)dateTime datePickerMode:(UIDatePickerMode)datePickerMode{
     
@@ -37,77 +45,110 @@
 
     NSDateFormatter * dateF = [[NSDateFormatter alloc]init];
     NSDate * date;
-    if (dateTime.length<1) {
-        date = [NSDate new];
-    }
     if (datePickerMode == UIDatePickerModeDate) {
         [dateF setDateFormat:@"yyyy-MM-dd"];
         date = [dateF dateFromString:dateTime];
-        if(date == nil)
-        {
-            date = [NSDate date];
-        }
-        [_datePick setDate:date animated:YES];
+
     }else if (datePickerMode == UIDatePickerModeTime){
         [dateF setDateFormat:@"HH:mm"];
         date = [dateF dateFromString:dateTime];
-        if(date == nil)
-        {
-            date = [NSDate date];
-        }
-        [_datePick setDate:date animated:YES];
-         [self.datePick setLocale:[NSLocale systemLocale]];
+        [self.datePick setLocale:[NSLocale systemLocale]];
     }
-}
--(void)datePickValueChange:(UIDatePicker*)sender{
     
-    NSDate * date = sender.date;
+    if(date == nil)
+    {
+        date = [NSDate date];
+    }
+    [self.datePick setDate:date animated:YES];
+}
+
+-(void)toolBarButtonClick:(UIButton *)sender{
+    
+    NSDate * date = self.datePick.date;
     NSDateFormatter * dateF = [[NSDateFormatter alloc]init];
     if (_pickerModel == UIDatePickerModeDate) {
-    [dateF setDateFormat:@"yyyy-MM-dd"];
-       NSString * dateStr = [dateF stringFromDate:date];
-    _timeValue = dateStr;
-     
+        [dateF setDateFormat:@"yyyy-MM-dd"];
+        NSString * dateStr = [dateF stringFromDate:date];
+        _timeValue = dateStr;
+        
     }else if (_pickerModel == UIDatePickerModeTime){
         
         [dateF setDateFormat:@"HH:mm"];
         NSString * dateStr = [dateF stringFromDate:date];
         _timeValue = dateStr;
     }
-}
-
--(void)toolBarButtonClick:(UIButton *)sender{
-    
     
     NSInteger index = sender.tag;
     if(_selectButtonIndex != nil){
+        
         self.selectButtonIndex(index, _timeValue);
     }
     
-    [self removeFromSuperview];
+    [self dismiss];
 }
 
-
-
--(void)initSubview{
-
-    _timeValue = @"";
-    [self addSubview:self.datePick];
-    [self addSubview:self.bgView];
+- (void)show
+{
+    NSEnumerator *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
+    for (UIWindow *window in frontToBackWindows){
+        BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
+        BOOL windowIsVisible = !window.hidden && window.alpha > 0;
+        BOOL windowLevelNormal = window.windowLevel == UIWindowLevelNormal;
+        
+        if (windowOnMainScreen && windowIsVisible && windowLevelNormal) {
+            [window addSubview:self];
+            break;
+        }
+    }
+    self.alpha = 0;
+    self.bgView.transform = CGAffineTransformIdentity;
+    self.bgView.transform = CGAffineTransformMakeTranslation(0, 260);
     
+    [UIView animateWithDuration:0.15
+                          delay:0
+                        options:UIViewAnimationCurveEaseIn | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         
+                         self.alpha = 1;
+                         self.bgView.transform = CGAffineTransformMakeTranslation(0, 0);
+                         
+                     }
+                     completion:^(BOOL finished){
+                         
+                         
+                     }];
+    
+    
+}
+
+- (void)dismiss
+{
+
+    [UIView animateWithDuration:0.15
+                          delay:0
+                        options:UIViewAnimationCurveEaseIn | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         
+                         self.alpha = 0;
+                         self.bgView.transform = CGAffineTransformMakeTranslation(0,SCREENHRIGHT-172);
+                         
+                     }
+                     completion:^(BOOL finished){
+                         
+                         [self removeFromSuperview];
+                         
+                     }];
 
 }
+
 
 -(UIDatePicker *)datePick{
 
     if (!_datePick) {
-        _datePick = [[UIDatePicker alloc]initWithFrame:CGRectMake((SCREENWIDTH-320)/2, 64.5, 0, 0)];
+        _datePick = [[UIDatePicker alloc]initWithFrame:CGRectMake(SCREENWIDTH/2-160, 44, 0, 0)];
         [_datePick setLocale:[NSLocale localeWithLocaleIdentifier:@"zh-CN"]];
-        [_datePick addTarget:self action:@selector(datePickValueChange:) forControlEvents:UIControlEventValueChanged];
         [_datePick setBackgroundColor:[UIColor whiteColor]];
-        
     }
-    
     return _datePick;
 }
 
@@ -157,7 +198,7 @@
 
 -(UIView *)bgView{
     if (!_bgView) {
-        _bgView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREENHRIGHT-270, SCREENWIDTH, 290)];
+        _bgView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREENHRIGHT-260, SCREENWIDTH, 260)];
         _bgView.backgroundColor = [UIColor whiteColor];
         [_bgView addSubview:self.toolView];
         [_bgView addSubview:self.datePick];
