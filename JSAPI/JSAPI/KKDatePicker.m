@@ -91,6 +91,7 @@
 
 -(void)initSubview{
 
+    _timeValue = @"";
     [self addSubview:self.datePick];
     [self addSubview:self.bgView];
     
