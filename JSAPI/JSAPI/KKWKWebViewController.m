@@ -26,6 +26,8 @@ KKWebViewDelegate>
 
 @implementation KKWKWebViewController
 
+#pragma mark -  life cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,7 +52,16 @@ KKWebViewDelegate>
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.webView installUserScript];
+    
+    if (self.url && [self.jsBridgeConfigInfo inLoadJSBridgeDomainListOfDomain:self.url.host])
+    {
+        [self.webView installUserScript];
+        
+    }else if (self.path)
+    {
+        [self.webView installUserScript];
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -77,6 +88,8 @@ KKWebViewDelegate>
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - on action
+
 - (void)onRefreshAction
 {
     [self callJS:@"startRefresh" param:@{@"startRefresh":@1}];
@@ -92,6 +105,8 @@ KKWebViewDelegate>
         [[KKRouter sharedInstance]popViewController];
     }
 }
+
+#pragma mark - telephone
 
 - (void)telephone:(NSDictionary*)param
 {
@@ -118,6 +133,7 @@ KKWebViewDelegate>
     
 }
 
+#pragma mark - Navtive call JS method
 
 - (void)callJS:(NSString*)method param:(NSDictionary*)param
 {
@@ -429,10 +445,7 @@ KKWebViewDelegate>
     self.webView.scrollView.bounces = NO;
 }
 
-
-
 @end
-
 
 @implementation KKWKWebViewController (Navigation)
 
@@ -483,10 +496,4 @@ KKWebViewDelegate>
     [[KKRouter sharedInstance]popViewController];
 }
 
-
 @end
-
-
-
-
-
