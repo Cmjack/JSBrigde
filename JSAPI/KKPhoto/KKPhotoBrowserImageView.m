@@ -134,26 +134,21 @@
 
 }
 
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(nullable UIView *)view atScale:(CGFloat)scale
-{
-
-}
-
 // 设置图片
 - (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder
 {
-//    __weak KKPhotoBrowserImageView *imageViewWeak = self;
+    __weak KKPhotoBrowserImageView *imageViewWeak = self;
     
     if (url) {
 
          self.loadingIndicator.hidden = NO;
         [self.imageView sd_setImageWithURL:url placeholderImage:placeholder options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
             
-            [self setImageLoadProgress:(CGFloat)receivedSize/(CGFloat)expectedSize];
+            [imageViewWeak setImageLoadProgress:(CGFloat)receivedSize/(CGFloat)expectedSize];
             
         } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-             self.loadingIndicator.hidden = YES;
-            [self setNeedsLayout];
+             imageViewWeak.loadingIndicator.hidden = YES;
+            [imageViewWeak setNeedsLayout];
         }];
         
     }else
