@@ -208,6 +208,7 @@ KKWebViewDelegate>
                    forKeyPath:@"estimatedProgress"
                       options:NSKeyValueObservingOptionNew
                       context:nil];
+        _webView.scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     }
     return _webView;
 }
