@@ -7,7 +7,7 @@
 //
 
 #import "KKWKWebViewController+Alert.h"
-
+#import "KKDatePicker.h"
 @implementation KKWKWebViewController (Alert)
 
 #pragma mark -sys alert
@@ -122,11 +122,37 @@
 - (void)datePicker:(NSDictionary*)param
 {
     
+    NSString * dateString = param[@"date"];
+    KKDatePicker * datepicker = [[KKDatePicker alloc]initWithFrame:CGRectMake(0, 0, 375, 675)];
+    [datepicker reloadDate:dateString datePickerMode:UIDatePickerModeDate];
+    datepicker.selectButtonIndex = ^(NSInteger index, NSString *timeValue) {
+        NSMutableDictionary *param = @{}.mutableCopy;
+        [param setObject:@(index) forKey:@"buttonIndex"];
+        [param setObject:timeValue forKey:@"date"];
+        
+        [self callJS:@"datePicker" param:param];
+
+    };
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:datepicker];
 }
 
 - (void)timePicker:(NSDictionary*)param
 {
     
+    NSString * dateString = param[@"time"];
+    KKDatePicker * datepicker = [[KKDatePicker alloc]initWithFrame:CGRectMake(0, 0, 375, 675)];
+    [datepicker reloadDate:dateString datePickerMode:UIDatePickerModeTime];
+    datepicker.selectButtonIndex = ^(NSInteger index, NSString *timeValue) {
+        NSMutableDictionary *param = @{}.mutableCopy;
+        [param setObject:@(index) forKey:@"buttonIndex"];
+        [param setObject:timeValue forKey:@"date"];
+        
+        [self callJS:@"timePicker" param:param];
+        
+    };
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:datepicker];
 }
 
 
