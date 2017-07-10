@@ -12,11 +12,13 @@
 #import <SDWebImage/UIImage+MultiFormat.h>
 #import <FLAnimatedImageView.h>
 #import <SDWebImage/FLAnimatedImageView+WebCache.h>
+#import <DACircularProgress/DACircularProgressView.h>
 
 @interface KKPhotoBrowserImageView ()<UIScrollViewDelegate>
 
 @property(nonatomic,strong)UIScrollView*scrollView;
 @property(nonatomic,strong)FLAnimatedImageView*imageView;
+@property(nonatomic,strong)DACircularProgressView *loadingIndicator;
 
 @end
 
@@ -74,6 +76,8 @@
             self.imageView.frame = rect;
         }
     }
+    self.loadingIndicator.center = self.scrollView.center;
+
 }
 
 #pragma mark - GestureRecognizer
@@ -142,10 +146,13 @@
     
     if (url) {
 
+         self.loadingIndicator.hidden = NO;
         [self.imageView sd_setImageWithURL:url placeholderImage:placeholder options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
             
-        } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            [self setImageLoadProgress:(CGFloat)receivedSize/(CGFloat)expectedSize];
             
+        } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+             self.loadingIndicator.hidden = YES;
             [self setNeedsLayout];
         }];
         
@@ -157,12 +164,18 @@
 
 }
 
+- (void)setImageLoadProgress:(CGFloat)progress
+{
+    
+    NSLog(@"%.2f",MAX(MIN(1, progress), 0));
+    [self.loadingIndicator setProgress:MAX(MIN(1, progress), 0) animated:YES];
+}
 
 - (void)initSubviews
 {
     [self addSubview:self.scrollView];
     [self.scrollView addSubview:self.imageView];
-    
+    [self addSubview:self.loadingIndicator];
     // 单击图片
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSingleTap:)];
 
@@ -209,5 +222,21 @@
     return _imageView;
 }
 
+-(DACircularProgressView *)loadingIndicator
+{
+    if (!_loadingIndicator) {
+        
+        _loadingIndicator = [[DACircularProgressView alloc] initWithFrame:CGRectMake(140.0f, 230.0f, 40.0f, 40.0f)];
+        _loadingIndicator.userInteractionEnabled = NO;
+        _loadingIndicator.thicknessRatio = 0.1;
+        _loadingIndicator.roundedCorners = NO;
+        _loadingIndicator.progressTintColor = [UIColor whiteColor];
+        _loadingIndicator.trackTintColor = [UIColor clearColor];
+        _loadingIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin |
+        UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
+        
+    }
+    return _loadingIndicator;
+}
 
 @end

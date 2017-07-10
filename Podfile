@@ -10,6 +10,7 @@ pod 'KKRouter'
 #pod 'MWPhotoBrowser'
 pod 'SDWebImage'
 pod 'SDWebImage/GIF'
+pod 'DACircularProgress'
 
 target 'JSAPI' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
