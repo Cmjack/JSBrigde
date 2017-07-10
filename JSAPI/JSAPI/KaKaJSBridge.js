@@ -205,6 +205,17 @@
   {
   _invoke({action:"webViewBounceDisable"});
   }
+  
+  KaKaApp.datePicker = function(param)
+  {
+  _invoke({action:"datePicker",param:param});
+  }
+  
+  KaKaApp.timePicker = function(param)
+  {
+  _invoke({action:"timePicker",param:param});
+  }
+
 
 }
   

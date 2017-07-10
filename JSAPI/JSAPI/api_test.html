@@ -284,6 +284,29 @@
                 </div>
     </form>
     <hr>
+    
+    <form>
+        <label for="basic-url">日期选择</label>
+        <div class="input-group">
+            <input  type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" onclick="smt_25()" type="button">submit</button>
+                </span>
+                </div>
+    </form>
+    <hr>
+    
+    <form>
+        <label for="basic-url">时间选择</label>
+        <div class="input-group">
+            <input  type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" onclick="smt_26()" type="button">submit</button>
+                </span>
+                </div>
+    </form>
+    <hr>
+    
 
     </div>
 
@@ -428,8 +451,16 @@
             
             KaKaApp.webViewBounceDisable();
         }
-
-
+    
+        function smt_25(){
+            
+            KaKaApp.datePicker({"date":"2017-01-02"});
+        }
+        
+        function smt_26(){
+            
+            KaKaApp.timePicker({"time":"13:11"});
+        }
 
         function test(param)
         {
@@ -442,6 +473,9 @@
             test(param)
 
         }
+    
+    
+    
         
     </script>
 
