@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F1099B91F134B3A00FA7A38 /* KKDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1099B81F134B3A00FA7A38 /* KKDatePicker.m */; };
 		3F1B18551EF7AF8700F93284 /* KKReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B18541EF7AF8700F93284 /* KKReachability.m */; };
 		3F1B185E1EF8BC4200F93284 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B185D1EF8BC4200F93284 /* ImageViewController.m */; };
 		3F2107B11F0CD761003A4DA3 /* BIZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2107B01F0CD761003A4DA3 /* BIZViewController.m */; };
@@ -32,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		107EABED2751C53816A8F774 /* Pods-JSAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSAPI/Pods-JSAPI.debug.xcconfig"; sourceTree = "<group>"; };
+		3F1099B71F134B3A00FA7A38 /* KKDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKDatePicker.h; sourceTree = "<group>"; };
+		3F1099B81F134B3A00FA7A38 /* KKDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKDatePicker.m; sourceTree = "<group>"; };
 		3F1B18531EF7AF8700F93284 /* KKReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKReachability.h; sourceTree = "<group>"; };
 		3F1B18541EF7AF8700F93284 /* KKReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKReachability.m; sourceTree = "<group>"; };
 		3F1B18591EF7B15A00F93284 /* KKWKWebViewController+Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KKWKWebViewController+Device.h"; sourceTree = "<group>"; };
@@ -151,6 +154,8 @@
 				3F2107B81F0F28AE003A4DA3 /* KKWKWebViewController+Alert.m */,
 				3F2107BA1F0F28BD003A4DA3 /* KKWKWebViewController+Toast.h */,
 				3F2107BB1F0F28BD003A4DA3 /* KKWKWebViewController+Toast.m */,
+				3F1099B71F134B3A00FA7A38 /* KKDatePicker.h */,
+				3F1099B81F134B3A00FA7A38 /* KKDatePicker.m */,
 				3F455E121F0A1042008E8BA0 /* api_test.html */,
 				3F66FED31EF3B05C0069EB3E /* KaKaJSBridge.js */,
 			);
@@ -321,6 +326,7 @@
 				3F1B185E1EF8BC4200F93284 /* ImageViewController.m in Sources */,
 				3F2107B91F0F28AE003A4DA3 /* KKWKWebViewController+Alert.m in Sources */,
 				3F1B18551EF7AF8700F93284 /* KKReachability.m in Sources */,
+				3F1099B91F134B3A00FA7A38 /* KKDatePicker.m in Sources */,
 				3F455E1F1F0CC1C4008E8BA0 /* KKWKWebViewController.m in Sources */,
 				3FCAD88B1EF8FB9C00C240D1 /* KKPhotoBrowserImageView.m in Sources */,
 				3F455E191F0C9D38008E8BA0 /* WKUserContentController+KKUserScript.m in Sources */,
