@@ -14,17 +14,6 @@
   window.webkit.messageHandlers.KaKa.postMessage(message);
   };
   
-
-  _hideMenu = function() { _invoke({action:"hideMenu"}); };
-  _showMenu = function() { _invoke({action:"showMenu"}); };
-  _setTitle = function(title) { _invoke({action:"setTitle", param:title}); };
-  _setShare = function(shareConfig) { _invoke({action:"setShare", param:shareConfig}); };
-  _share = function(shareConfig) { _invoke({action:"share", param:shareConfig}); };
-  _loginWithWechat = function(state) { _invoke({action:"loginWithWechat", param:state}); };
-  _showNativePage = function(pageMessage) { _invoke({action:"showNativePage", param:pageMessage}); };
-  _hideCloseButton = function(){ _invoke({action:"hideCloseButton"}); };
-  _setUserInfo = function(userInfo){ _invoke({action:"setUserInfo",param:userInfo}); };
-  
   _showAlert = function(param){_invoke({action:"showAlert",param:param});};
   _showConfirm = function(param){_invoke({action:"showConfirm",param:param});};
   _showPrompt = function(param){_invoke({action:"showPrompt",param:param});};
