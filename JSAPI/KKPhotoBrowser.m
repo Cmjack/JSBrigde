@@ -12,7 +12,7 @@
 #define KKPhotoBrowserImageViewMargin 10
 
 
-@interface KKPhotoBrowser ()<UIScrollViewDelegate>
+@interface KKPhotoBrowser ()<UIScrollViewDelegate,KKPhotoBrowserImageViewDelegate>
 
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,assign)CGPoint beginContentOffset;
@@ -21,26 +21,24 @@
 
 @implementation KKPhotoBrowser
 
-- (id)initWithFrame:(CGRect)frame
+- (void)viewDidLoad
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // 背景颜色
-        self.backgroundColor = [UIColor blackColor];
-    }
-    return self;
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor blackColor];
+    [self initSubviews];
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
-- (void)layoutSubviews
+- (void)viewWillLayoutSubviews
 {
-    [super layoutSubviews];
+    [super viewWillLayoutSubviews];
     
     // 获取到自己的bounds
-    CGRect rect = self.bounds;
+    CGRect rect = self.view.bounds;
     rect.size.width += KKPhotoBrowserImageViewMargin * 2;
     
     _scrollView.bounds = rect;
-    _scrollView.center = self.center;
+    _scrollView.center = self.view.center;
     
     CGFloat y = 0;
     CGFloat w = _scrollView.frame.size.width - KKPhotoBrowserImageViewMargin * 2;
@@ -54,36 +52,25 @@
     // ScrollView的内容尺寸
     _scrollView.contentSize = CGSizeMake(_scrollView.subviews.count * _scrollView.frame.size.width, 0);
     
-//    // 内容的偏移量  意思就是点击中间图片的话 直接就展示到中间的位置了
-//    _scrollView.contentOffset = CGPointMake(self.currentImageIndex * _scrollView.frame.size.width, 0);
-//    
-//    //是否已经展示了中间的图片了
-//    if (!_hasShowedFistView) {
-//        
-//        [self showFirstImage];
-//    }
-//    
-//    _pageControll.center = CGPointMake(self.bounds.size.width * 0.5, self.bounds
-//                                       .size.height - 50);
     _scrollView.contentOffset = CGPointMake(self.currentImageIndex * _scrollView.frame.size.width, 0);
-    
 }
 
 
-- (void)didMoveToSuperview
+- (void)initSubviews
 {
     _scrollView = [[UIScrollView alloc] init];
     _scrollView.delegate = self;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.pagingEnabled = YES;
-    [self addSubview:_scrollView];
+    [self.view addSubview:_scrollView];
     
     for (int i = 0; i < self.imageCount; i++) {
         
         // 在ScrollView上添加图片
         KKPhotoBrowserImageView *imageView = [[KKPhotoBrowserImageView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
         imageView.tag = i;
+        imageView.delegate = self;
         [_scrollView addSubview:imageView];
     }
     [self preloadImageOfImageViewForIndex:_currentImageIndex];
@@ -121,49 +108,6 @@
     
 }
 
-// 展示第一张图片
-- (void)showFirstImage
-{
-    
-//    UIView *sourceView = nil;
-//    
-//    //
-//    if ([self.sourceImagesContainerView isKindOfClass:UICollectionView.class]) {
-//        UICollectionView *view = (UICollectionView *)self.sourceImagesContainerView;
-//        NSIndexPath *path = [NSIndexPath indexPathForItem:self.currentImageIndex inSection:0];
-//        sourceView = [view cellForItemAtIndexPath:path];
-//    }else {
-//        
-//        
-//        
-//        sourceView = self.sourceImagesContainerView.subviews[self.currentImageIndex];
-//        
-//    }
-//    
-//    
-//    CGRect rect = [self.sourceImagesContainerView convertRect:sourceView.frame toView:self];
-//    
-//    UIImageView *tempView = [[UIImageView alloc] init];
-//    tempView.image = [self placeholderImageForIndex:self.currentImageIndex];
-//    
-//    [self addSubview:tempView];
-//    
-//    CGRect targetTemp = [_scrollView.subviews[self.currentImageIndex] bounds];
-//    
-//    tempView.frame = rect;
-//    tempView.contentMode = [_scrollView.subviews[self.currentImageIndex] contentMode];
-//    _scrollView.hidden = YES;
-    
-//    [UIView animateWithDuration:0.4 animations:^{
-//        tempView.center = self.center;
-//        tempView.bounds = (CGRect){CGPointZero, targetTemp.size};
-//    } completion:^(BOOL finished) {
-//        _hasShowedFistView = YES;
-//        [tempView removeFromSuperview];
-//        _scrollView.hidden = NO;
-//    }];
-}
-
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     _beginContentOffset = scrollView.contentOffset;
@@ -188,16 +132,61 @@
     
 }
 
+#pragma mark - KKPhotoBrowserImageViewDelegate
 
+- (void)photoBrowserImageViewSingleTap:(UIView*)aView
+{
+    [self dismiss];
+}
+- (void)photoBrowserImageViewLongPress:(UIView*)aView
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"保存图片"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * _Nonnull action) {
+                                                       
+                                                       
+                                                   }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消"
+                                                     style:UIAlertActionStyleCancel
+                                                   handler:^(UIAlertAction * _Nonnull action) {
+                                                       
+                                                       
+                                                   }];
+    
+    [alertController addAction:action];
+    [alertController addAction:cancel];
+    [self presentViewController:alertController animated:YES completion:nil];
 
+}
 // 展示的方法
 - (void)show
 {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    self.frame = window.bounds;
+    self.view.frame = window.bounds;
     // 监听自己的Frame
-    [window addSubview:self];
+    [window.rootViewController addChildViewController:self];
+    [window.rootViewController.view addSubview:self.view];
+    
+    self.view.alpha=0;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.alpha=1;
+    } completion:^(BOOL finished) {
+        
+    }];
+
 }
 
-
+- (void)dismiss
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        self.view.alpha=0;
+    } completion:^(BOOL finished) {
+        [self removeFromParentViewController];
+        [self.view removeFromSuperview];
+    }];
+    
+}
 @end

@@ -40,7 +40,9 @@ KKWebViewDelegate>
         [self.webView loadWebURL:self.url];
         
     }else if (self.path) {
+        
         [self.webView loadLocalHtml:self.path];
+        
     }
     
 }
@@ -55,7 +57,6 @@ KKWebViewDelegate>
 {
     [super viewWillDisappear:animated];
     [self.webView removeUserScript];
-
 }
 
 - (void)viewWillLayoutSubviews
@@ -91,6 +92,32 @@ KKWebViewDelegate>
         [[KKRouter sharedInstance]popViewController];
     }
 }
+
+- (void)telephone:(NSDictionary*)param
+{
+    NSString *mobile = param[@"mobile"];
+    
+    if (mobile&&mobile.length>0) {
+        
+        mobile = [mobile stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        NSMutableString * str= [NSMutableString string];
+        
+        if (![mobile hasPrefix:@"tel:"]) {
+            
+            [str appendFormat:@"tel:%@",mobile];
+            
+        }else
+        {
+            [str appendString:mobile];
+        }
+        UIWebView * callWebview = [[UIWebView alloc] init];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+        [self.view addSubview:callWebview];
+    }
+    
+}
+
 
 - (void)callJS:(NSString*)method param:(NSDictionary*)param
 {
@@ -168,15 +195,6 @@ KKWebViewDelegate>
     }
     return _webView;
 }
-
-//- (KKJSBridgeConfigInfo *)configInfo
-//{
-//    if (!_configInfo) {
-//        
-//        _configInfo = [KKJSBridgeConfigInfo defaultJSBridgeConfigInfo];
-//    }
-//    return _configInfo;
-//}
 
 - (UIRefreshControl *)refreshControl
 {
@@ -299,7 +317,9 @@ KKWebViewDelegate>
         
     }else if ([scheme isEqualToString:@"tel"])
     {
-        //        [Mobile telephone:url.absoluteString];
+        NSMutableDictionary *param = @{}.mutableCopy;
+        [param setObject:url.absoluteString forKey:@"mobile"];
+        [self telephone:param.copy];
         decisionHandler(WKNavigationActionPolicyCancel);
         
     }else if ([scheme isEqualToString:@"sms:"])
@@ -409,6 +429,8 @@ KKWebViewDelegate>
     self.webView.scrollView.bounces = NO;
 }
 
+
+
 @end
 
 
@@ -444,7 +466,7 @@ KKWebViewDelegate>
     
 }
 
-- (void)navigationGoBack
+- (void)goBack
 {
     if ([self.webView canGoBack])
     {
@@ -456,7 +478,7 @@ KKWebViewDelegate>
     }
 }
 
-- (void)navigationClose
+- (void)closeWebView
 {
     [[KKRouter sharedInstance]popViewController];
 }

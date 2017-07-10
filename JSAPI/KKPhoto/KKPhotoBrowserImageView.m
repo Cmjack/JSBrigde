@@ -45,10 +45,10 @@
 {
     [super layoutSubviews];
     
-    if (_imageView.image) {
+    if (self.imageView.image) {
         
-        CGFloat width = _imageView.image.size.width/2;
-        CGFloat height = _imageView.image.size.height/2;
+        CGFloat width = self.imageView.image.size.width/2;
+        CGFloat height = self.imageView.image.size.height/2;
         
         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
 //        CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
@@ -65,13 +65,13 @@
 //            height = screenWidth;
 //        }
         
-        _imageView.bounds = CGRectMake(0, 0, width,height);
-        _imageView.center = self.scrollView.center;
-        [self.scrollView setContentSize:_imageView.bounds.size];
-        if (_imageView.frame.origin.y<0) {
-            CGRect rect = _imageView.frame;
+        self.imageView.bounds = CGRectMake(0, 0, width,height);
+        self.imageView.center = self.scrollView.center;
+        [self.scrollView setContentSize:self.imageView.bounds.size];
+        if (self.imageView.frame.origin.y<0) {
+            CGRect rect = self.imageView.frame;
             rect.origin.y=0;
-            _imageView.frame = rect;
+            self.imageView.frame = rect;
         }
     }
 }
@@ -80,7 +80,9 @@
 
 - (void)onSingleTap:(UITapGestureRecognizer*)ges
 {
-    
+    if ([self.delegate respondsToSelector:@selector(photoBrowserImageViewSingleTap:)]) {
+        [self.delegate photoBrowserImageViewSingleTap:self];
+    }
 }
 
 - (void)onDoubleTap:(UITapGestureRecognizer*)ges
@@ -97,7 +99,13 @@
 
 - (void)onLongPress:(UILongPressGestureRecognizer*)ges
 {
-    
+    if (ges.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"xxxx");
+        if ([self.delegate respondsToSelector:@selector(photoBrowserImageViewLongPress:)]) {
+            [self.delegate photoBrowserImageViewLongPress:self];
+        }
+
+    }
 }
 
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
@@ -118,7 +126,7 @@
         
         offsetY = (scrollView.bounds.size.height- scrollView.contentSize.height)/2;
     }
-    _imageView.center=CGPointMake(scrollView.contentSize.width/2+offsetX,scrollView.contentSize.height/2+offsetY);
+    self.imageView.center=CGPointMake(scrollView.contentSize.width/2+offsetX,scrollView.contentSize.height/2+offsetY);
 
 }
 
@@ -130,7 +138,7 @@
 // 设置图片
 - (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder
 {
-    __weak KKPhotoBrowserImageView *imageViewWeak = self;
+//    __weak KKPhotoBrowserImageView *imageViewWeak = self;
     
     if (url) {
 
@@ -138,7 +146,7 @@
             
         } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             
-            [imageViewWeak setNeedsLayout];
+            [self setNeedsLayout];
         }];
         
     }else
@@ -155,10 +163,8 @@
     [self addSubview:self.scrollView];
     [self.scrollView addSubview:self.imageView];
     
-    
     // 单击图片
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSingleTap:)];
-
 
     // 双击放大图片
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onDoubleTap:)];

@@ -36,7 +36,7 @@
 
 @end
 
-@interface KKPhotoBrowser : UIView
+@interface KKPhotoBrowser : UIViewController
 
 // 容器
 @property (nonatomic, weak) UIView *sourceImagesContainerView;

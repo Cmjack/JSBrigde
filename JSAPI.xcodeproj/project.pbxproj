@@ -11,6 +11,8 @@
 		3F1B185E1EF8BC4200F93284 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B185D1EF8BC4200F93284 /* ImageViewController.m */; };
 		3F2107B11F0CD761003A4DA3 /* BIZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2107B01F0CD761003A4DA3 /* BIZViewController.m */; };
 		3F2107B21F0CE5AA003A4DA3 /* KKWKWebViewController+Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1B185A1EF7B15A00F93284 /* KKWKWebViewController+Device.m */; };
+		3F2107B91F0F28AE003A4DA3 /* KKWKWebViewController+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2107B81F0F28AE003A4DA3 /* KKWKWebViewController+Alert.m */; };
+		3F2107BC1F0F28BD003A4DA3 /* KKWKWebViewController+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2107BB1F0F28BD003A4DA3 /* KKWKWebViewController+Toast.m */; };
 		3F455E131F0A1042008E8BA0 /* api_test.html in Resources */ = {isa = PBXBuildFile; fileRef = 3F455E121F0A1042008E8BA0 /* api_test.html */; };
 		3F455E161F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F455E151F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.m */; };
 		3F455E191F0C9D38008E8BA0 /* WKUserContentController+KKUserScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F455E181F0C9D38008E8BA0 /* WKUserContentController+KKUserScript.m */; };
@@ -32,14 +34,16 @@
 		107EABED2751C53816A8F774 /* Pods-JSAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSAPI/Pods-JSAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		3F1B18531EF7AF8700F93284 /* KKReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKReachability.h; sourceTree = "<group>"; };
 		3F1B18541EF7AF8700F93284 /* KKReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKReachability.m; sourceTree = "<group>"; };
-		3F1B18561EF7B06400F93284 /* KKWebViewBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKWebViewBridge.h; sourceTree = "<group>"; };
-		3F1B18571EF7B06400F93284 /* KKWebViewBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKWebViewBridge.m; sourceTree = "<group>"; };
 		3F1B18591EF7B15A00F93284 /* KKWKWebViewController+Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KKWKWebViewController+Device.h"; sourceTree = "<group>"; };
 		3F1B185A1EF7B15A00F93284 /* KKWKWebViewController+Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KKWKWebViewController+Device.m"; sourceTree = "<group>"; };
 		3F1B185C1EF8BC4200F93284 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		3F1B185D1EF8BC4200F93284 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		3F2107AF1F0CD761003A4DA3 /* BIZViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIZViewController.h; sourceTree = "<group>"; };
 		3F2107B01F0CD761003A4DA3 /* BIZViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BIZViewController.m; sourceTree = "<group>"; };
+		3F2107B71F0F28AE003A4DA3 /* KKWKWebViewController+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KKWKWebViewController+Alert.h"; sourceTree = "<group>"; };
+		3F2107B81F0F28AE003A4DA3 /* KKWKWebViewController+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KKWKWebViewController+Alert.m"; sourceTree = "<group>"; };
+		3F2107BA1F0F28BD003A4DA3 /* KKWKWebViewController+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KKWKWebViewController+Toast.h"; sourceTree = "<group>"; };
+		3F2107BB1F0F28BD003A4DA3 /* KKWKWebViewController+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KKWKWebViewController+Toast.m"; sourceTree = "<group>"; };
 		3F455E121F0A1042008E8BA0 /* api_test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = api_test.html; sourceTree = "<group>"; };
 		3F455E141F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKJSBridgeConfigInfo.h; sourceTree = "<group>"; };
 		3F455E151F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKJSBridgeConfigInfo.m; sourceTree = "<group>"; };
@@ -143,8 +147,10 @@
 				3F455E151F0BB3E0008E8BA0 /* KKJSBridgeConfigInfo.m */,
 				3F1B18591EF7B15A00F93284 /* KKWKWebViewController+Device.h */,
 				3F1B185A1EF7B15A00F93284 /* KKWKWebViewController+Device.m */,
-				3F1B18561EF7B06400F93284 /* KKWebViewBridge.h */,
-				3F1B18571EF7B06400F93284 /* KKWebViewBridge.m */,
+				3F2107B71F0F28AE003A4DA3 /* KKWKWebViewController+Alert.h */,
+				3F2107B81F0F28AE003A4DA3 /* KKWKWebViewController+Alert.m */,
+				3F2107BA1F0F28BD003A4DA3 /* KKWKWebViewController+Toast.h */,
+				3F2107BB1F0F28BD003A4DA3 /* KKWKWebViewController+Toast.m */,
 				3F455E121F0A1042008E8BA0 /* api_test.html */,
 				3F66FED31EF3B05C0069EB3E /* KaKaJSBridge.js */,
 			);
@@ -311,7 +317,9 @@
 				3F66FEAF1EF3883D0069EB3E /* main.m in Sources */,
 				3F2107B11F0CD761003A4DA3 /* BIZViewController.m in Sources */,
 				3F2107B21F0CE5AA003A4DA3 /* KKWKWebViewController+Device.m in Sources */,
+				3F2107BC1F0F28BD003A4DA3 /* KKWKWebViewController+Toast.m in Sources */,
 				3F1B185E1EF8BC4200F93284 /* ImageViewController.m in Sources */,
+				3F2107B91F0F28AE003A4DA3 /* KKWKWebViewController+Alert.m in Sources */,
 				3F1B18551EF7AF8700F93284 /* KKReachability.m in Sources */,
 				3F455E1F1F0CC1C4008E8BA0 /* KKWKWebViewController.m in Sources */,
 				3FCAD88B1EF8FB9C00C240D1 /* KKPhotoBrowserImageView.m in Sources */,

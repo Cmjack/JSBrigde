@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol KKPhotoBrowserImageViewDelegate <NSObject>
+
+@optional
+- (void)photoBrowserImageViewSingleTap:(UIView*)aView;
+- (void)photoBrowserImageViewLongPress:(UIView*)aView;
+
+@end
+
 @interface KKPhotoBrowserImageView : UIView
+
+@property(nonatomic,weak)id<KKPhotoBrowserImageViewDelegate> delegate;
 
 // 记录是否已经加载图片
 @property (nonatomic,assign) BOOL preload;

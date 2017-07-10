@@ -36,8 +36,14 @@
   _getNetworkType = function(param){_invoke({action:"getNetworkType",param:param});};
   _checkInstallApps = function(param){_invoke({action:"checkInstallApps",param:param});};
   _launchApp = function(param){_invoke({action:"launchApp",param:param});};
-  _openWebView = function(param){_invoke({action:"openWebView",param:param})}
+  _openLink = function(param){_invoke({action:"openLink",param:param});};
+  _previewImages = function(param){_invoke({action:"previewImages",param:param});};
   
+  _setNavigationTitle = function(param){_invoke({action:"setNavigationTitle",param:param});};
+  _setNavigationLeftTitle = function(param){_invoke({action:"setNavigationLeftTitle",param:param});};
+  _goBack = function(){_invoke({action:"goBack"});};
+  _closeWebView = function(){_invoke({action:"closeWebView"});};
+  _telephone = function(param){_invoke({action:"telephone",param:param});};
   
   KaKaApp.init = function(){
   readyQueue = readyQueue || [];
@@ -141,12 +147,65 @@
   _launchApp(param);
   }
   
-  KaKaApp.openWebView = function(param)
+  KaKaApp.openLink = function(param)
   {
-  _openWebView(param);
+  _openLink(param);
   }
   
+  KaKaApp.previewImages = function(param)
+  {
+  _previewImages(param);
+  }
   
+  KaKaApp.setNavigationTitle = function(param)
+  {
+  _setNavigationTitle(param);
+  }
+  
+  KaKaApp.setNavigationLeftTitle = function(param)
+  {
+  _setNavigationLeftTitle(param);
+  }
+  
+  KaKaApp.goBack = function()
+  {
+  _goBack();
+  }
+
+  KaKaApp.closeWebView = function()
+  {
+  _closeWebView();
+  }
+  KaKaApp.telephone = function(param)
+  {
+  _telephone(param);
+  }
+  
+  KaKaApp.pullToRefreshEnable = function()
+  {
+  _invoke({action:"pullToRefreshEnable"});
+  }
+  
+  KaKaApp.pullToRefreshDisable = function()
+  {
+  _invoke({action:"pullToRefreshDisable"});
+  }
+  
+  KaKaApp.pullToRefreshStop = function()
+  {
+  _invoke({action:"pullToRefreshStop"});
+  }
+  
+  KaKaApp.webViewBounceEnable = function()
+  {
+  _invoke({action:"webViewBounceEnable"});
+  }
+  
+  KaKaApp.webViewBounceDisable = function()
+  {
+  _invoke({action:"webViewBounceDisable"});
+  }
+
 }
   
 )();
