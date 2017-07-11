@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
                     WKWebView 与 JS 交互 API
                    DESC
   s.homepage     = "https://kakatrip.cn/"
-  s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "CaiMing" => "ming.cai@kakatrip.cn" }
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://git.oschina.net/kakaBTravel/JSAPI.git", :tag => "#{s.version}" }
@@ -22,6 +22,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "KKProgressHUD"
-  s.dependency "KKRouter" 
+  s.dependency "KKRouter"
 
 end
