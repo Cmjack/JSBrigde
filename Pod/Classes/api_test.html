@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+
+        <form>
+            <label for="basic-url">弹窗alert</label>
+            <div class="input-group">
+                <input id="ipt_1" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button id="btn_1" class="btn btn-secondary" onclick="smt_1()" type="button">submit</button>
+                </span>
+            </div>
+        </form>
+        <hr>
+
+        <form>
+            <label for="basic-url">弹窗confirm</label>
+            <div class="input-group">
+                <input id="ipt_2" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button id="btn_2" class="btn btn-secondary"  onclick="smt_2()" type="button">submit</button>
+                </span>
+            </div>
+        </form>
+        <hr>
+
+        <form>
+            <label for="basic-url">弹窗Prompt</label>
+            <div class="input-group">
+                <input id="ipt_3" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button id="btn_3" class="btn btn-secondary" onclick="smt_3()" type="button">submit</button>
+                </span>
+            </div>
+        </form>
+        <hr>
+        <form>
+            <label for="basic-url">actionSheet</label>
+            <div class="input-group">
+                <input id="ipt_4" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button id="btn_4" class="btn btn-secondary" onclick="smt_4()" type="button">submit</button>
+                </span>
+            </div>
+        </form>
+        <hr>
+        <form>
+            <label for="basic-url">震动</label>
+            <div class="input-group">
+                <input id="ipt_5" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button id="btn_5" class="btn btn-secondary" onclick="smt_5()" type="button">submit</button>
+                </span>
+            </div>
+        </form>
+        <hr>
+        <form>
+            <label for="basic-url">showToast</label>
+            <div class="input-group">
+                <input id="ipt_6" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button id="btn_6" class="btn btn-secondary" onclick="smt_6()" type="button">submit</button>
+                </span>
+            </div>
+        </form>
+        <hr>
+        <form>
+            <label for="basic-url">showLoading</label>
+            <div class="input-group">
+                <input id="ipt_7" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button id="btn_7" class="btn btn-secondary" onclick="smt_7()" type="button">submit</button>
+                </span>
+            </div>
+        </form>
+        <hr>
+        <form>
+            <label for="basic-url">hideLoading</label>
+            <div class="input-group">
+                <input id="ipt_8" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button id="btn_8" class="btn btn-secondary" onclick="smt_8()" type="button">submit</button>
+                </span>
+            </div>
+        </form>
+        <hr>
+        <form>
+            <label for="basic-url">getNetworkType</label>
+            <div class="input-group">
+                <input id="ipt_9" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button id="btn_9" class="btn btn-secondary" onclick="smt_9()" type="button">submit</button>
+                </span>
+            </div>
+        </form>
+        <hr>
+        <form>
+            <label for="basic-url">checkInstallApps</label>
+            <div class="input-group">
+                <input id="ipt_10" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button id="btn_10" class="btn btn-secondary" onclick="smt_10()" type="button">submit</button>
+                </span>
+            </div>
+        </form>
+        <hr>
+        <form>
+            <label for="basic-url">launchApp</label>
+            <div class="input-group">
+                <input id="ipt_11" type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button id="btn_11" class="btn btn-secondary" onclick="smt_11()" type="button">submit</button>
+                </span>
+            </div>
+        </form>
+        <hr>
+        
+        <form>
+            <label for="basic-url">openLink</label>
+            <div class="input-group">
+                <input id="ipt_12" type="text" class="form-control" value="">
+                    <span class="input-group-btn">
+                        <button id="btn_12" class="btn btn-secondary" onclick="smt_12()" type="button">submit</button>
+                    </span>
+                    </div>
+        </form>
+        <hr>
+        
+        <form>
+            <label for="basic-url">图片预览</label>
+            <div class="input-group">
+                <input id="ipt_13" type="text" class="form-control" value="">
+                    <span class="input-group-btn">
+                        <button id="btn_13" class="btn btn-secondary" onclick="smt_13()" type="button">submit</button>
+                    </span>
+                    </div>
+        </form>
+        <hr>
+        
+        
+        <form>
+            <label for="basic-url">设置导航栏标题</label>
+            <div class="input-group">
+                <input id="ipt_14" type="text" class="form-control" value="">
+                    <span class="input-group-btn">
+                        <button id="btn_14" class="btn btn-secondary" onclick="smt_14()" type="button">submit</button>
+                    </span>
+                    </div>
+        </form>
+        <hr>
+        
+        <form>
+            <label for="basic-url">设置导航栏左边按钮标题</label>
+            <div class="input-group">
+                <input id="ipt_15" type="text" class="form-control" value="">
+                    <span class="input-group-btn">
+                        <button id="btn_15" class="btn btn-secondary" onclick="smt_15()" type="button">submit</button>
+                    </span>
+                    </div>
+        </form>
+        <hr>
+        
+        
+        
+        
+        <form>
+            <label for="basic-url">baidu.com</label>
+            <div class="input-group">
+                <input  type="text" class="form-control" value="">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" onclick="smt_16()" type="button">submit</button>
+                    </span>
+                    </div>
+        </form>
+        <hr>
+        
+        <form>
+            <label for="basic-url">返回上一级页面</label>
+            <div class="input-group">
+                <input  type="text" class="form-control" value="">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" onclick="smt_17()" type="button">submit</button>
+                    </span>
+                    </div>
+        </form>
+        <hr>
+        
+        <form>
+            <label for="basic-url">关闭当前页面</label>
+            <div class="input-group">
+                <input  type="text" class="form-control" value="">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" onclick="smt_18()" type="button">submit</button>
+                    </span>
+                    </div>
+        </form>
+        <hr>
+        
+        <form>
+            <label for="basic-url">拨打电话</label>
+            <div class="input-group">
+                <input  type="text" class="form-control" value="">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" onclick="smt_19()" type="button">submit</button>
+                    </span>
+                    </div>
+        </form>
+        <hr>
+        
+        <form>
+            <label for="basic-url">拨打电话</label>
+            <div class="input-group">
+                <input  type="text" class="form-control" value="">
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" onclick="smt_19()" type="button">submit</button>
+                    </span>
+                    </div>
+        </form>
+        <hr>
+
+
+    <form>
+        <label for="basic-url">开启下拉刷新</label>
+        <div class="input-group">
+            <input  type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" onclick="smt_20()" type="button">submit</button>
+                </span>
+                </div>
+    </form>
+    <hr>
+    
+    
+    <form>
+        <label for="basic-url">禁用下拉刷新</label>
+        <div class="input-group">
+            <input  type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" onclick="smt_21()" type="button">submit</button>
+                </span>
+                </div>
+    </form>
+    <hr>
+
+
+
+    <form>
+        <label for="basic-url">停止下拉刷新</label>
+        <div class="input-group">
+            <input  type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" onclick="smt_22()" type="button">submit</button>
+                </span>
+                </div>
+    </form>
+    <hr>
+    
+    <form>
+        <label for="basic-url">启用webBounce</label>
+        <div class="input-group">
+            <input  type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" onclick="smt_23()" type="button">submit</button>
+                </span>
+                </div>
+    </form>
+    <hr>
+    
+    <form>
+        <label for="basic-url">禁用webBounce</label>
+        <div class="input-group">
+            <input  type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" onclick="smt_24()" type="button">submit</button>
+                </span>
+                </div>
+    </form>
+    <hr>
+    
+    <form>
+        <label for="basic-url">日期选择</label>
+        <div class="input-group">
+            <input  type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" onclick="smt_25()" type="button">submit</button>
+                </span>
+                </div>
+    </form>
+    <hr>
+    
+    <form>
+        <label for="basic-url">时间选择</label>
+        <div class="input-group">
+            <input  type="text" class="form-control" value="">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" onclick="smt_26()" type="button">submit</button>
+                </span>
+                </div>
+    </form>
+    <hr>
+    
+
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        var ipt_1 = `{"message":"这个一个弹窗","title":"提示","buttonName":"收到"}`;
+        var ipt_2 = `{"message":"这个一个弹窗","title":"提示","buttonLabels":["知道了","取消"]}`;
+        var ipt_3 = `{"message":"这个一个弹窗","title":"提示","placeholder":"请输入密码","buttonLabels":["知道了","取消"]}`;
+        var ipt_4 = `{"message":"这个一个弹窗","title":"提示","cancelButton":"取消按钮","otherButtons":["孙悟空","猪八戒","唐僧","沙和尚"]}`
+        var ipt_5 = `{"text":"震动"}`;
+        var ipt_6 = `{"text":"加载成功"}`;
+        var ipt_7 = `{"text":"加载中..."}`;
+        var ipt_8 = `{"text":"hide"}`;
+        var ipt_9 = `{"text":"获取网络类型"}`;
+        var ipt_10 = `{"apps":["kakatrip://"]}`;
+        var ipt_11 = `{"app":"kakatrip://...."}`;
+        var ipt_12 = `{"app":"www://"}`;
+        var ipt_13 = `{"urls":"www://"}`;
+
+
+        $("#ipt_1").val(ipt_1);
+        $("#ipt_2").val(ipt_2);
+        $("#ipt_3").val(ipt_3);
+        $("#ipt_4").val(ipt_4);
+        $("#ipt_5").val(ipt_5);
+        $("#ipt_6").val(ipt_6);
+        $("#ipt_7").val(ipt_7);
+        $("#ipt_8").val(ipt_8);
+        $("#ipt_9").val(ipt_9);
+        $("#ipt_10").val(ipt_10);
+        $("#ipt_11").val(ipt_11);
+        $("#ipt_12").val(ipt_12);
+        $("#ipt_13").val(ipt_13);
+        
+        
+        function smt_1(){
+            KaKaApp.showAlert({title:'标题',message:'这是一个弹窗',buttonName:'收到'})
+        }
+        function smt_2(){
+            KaKaApp.showConfirm({title:'标题',message:'这是一个弹窗',"buttonLabels":["知道了","取消"]})
+        }
+        function smt_3(){
+            KaKaApp.showPrompt({message:'这个一个弹窗','title':'提示','placeholder':'请输入密码','buttonLabels':["知道了","取消"]})
+        }
+        function smt_4(){
+            KaKaApp.showActionSheet({message:'这个一个弹窗',title:'提示',cancelButton:'取消按钮',otherButtons:["孙悟空","猪八戒","唐僧","沙和尚"]})
+        }
+        function smt_5(){
+            KaKaApp.vibrate()
+        }
+        function smt_6(){
+            KaKaApp.showToast({"text":"加载成功"})
+        }
+        function smt_7(){
+            KaKaApp.showLoading({"text":"加载中..."})
+        }
+        function smt_8(){
+            KaKaApp.hideLoading()
+        }
+        function smt_9(){
+            KaKaApp.getNetworkType()
+        }
+        function smt_10(){
+            KaKaApp.checkInstallApps({"apps":["kakatrip://"]})
+        }
+        function smt_11(){
+            KaKaApp.launchApp({"app":"kakatrip://...."})
+        }
+    
+        function smt_11(){
+            KaKaApp.launchApp({"app":"kakatrip://...."})
+        }
+    
+        function smt_12(){
+            
+            KaKaApp.openLink({"url":"https://www.baidu.com"});
+        }
+    
+        function smt_13(){
+            
+            KaKaApp.previewImages({"urls":["http://ww2.sinaimg.cn/mw690/e67669aagw1fa6gynybcsj20iz0sgwh.jpg",
+                                         "http://ww2.sinaimg.cn/mw690/e67669aagw1fbfr3ryrt2j21kw2dc4eo.jpg",
+                                         "http://wx4.sinaimg.cn/mw690/63e6fd01ly1fe2iqm8d2wj20qo11cn5d.jpg",
+                                         "http://ww4.sinaimg.cn/bmiddle/6a15cf5aly1fewww17l6rj20qo0yatfc.jpg",
+                                         "http://wx3.sinaimg.cn/mw690/b024b1c1ly1feg7x4lu0cg20dw07te85.gif",
+                                         "http://ww3.sinaimg.cn/bmiddle/c45009afgy1ff9r1z9nsgj20qo3abhcj.jpg"]});
+        }
+    
+    
+        function smt_14(){
+            
+            KaKaApp.setNavigationTitle({"title":"https://www.baidu.com"});
+        }
+    
+        function smt_15(){
+            
+            KaKaApp.setNavigationLeftTitle({"title":"返回"});
+        }
+    
+        function smt_16(){
+            
+            window.open("https://www.baidu.com");
+        }
+    
+        function smt_17(){
+            
+            KaKaApp.goBack();
+        }
+    
+        function smt_18(){
+            
+            KaKaApp.closeWebView();
+        }
+    
+        function smt_19(){
+            
+            KaKaApp.telephone({"mobile":"18926536250"});
+        }
+    
+        function smt_20(){
+            
+            KaKaApp.pullToRefreshEnable();
+        }
+    
+        function smt_21(){
+            
+            KaKaApp.pullToRefreshDisable();
+        }
+
+
+        function smt_22(){
+            
+            KaKaApp.pullToRefreshStop();
+        }
+    
+        function smt_23(){
+            
+            KaKaApp.webViewBounceEnable();
+        }
+
+        function smt_24(){
+            
+            KaKaApp.webViewBounceDisable();
+        }
+    
+        function smt_25(){
+            
+            KaKaApp.datePicker({"date":"2017-01-02"});
+        }
+        
+        function smt_26(){
+            
+            KaKaApp.timePicker({"time":"13:11"});
+        }
+    
+        function test(param)
+        {
+            var str = JSON.stringify(param);
+            KaKaApp.showAlert({title:'收到Native返回的内容',message:str,buttonName:'收到',xx:param})
+        }
+    
+        function nativeCallJS(param){
+            
+            test(param)
+
+        }
+    
+    
+    
+        
+    </script>
+
+</body>
+</html>
