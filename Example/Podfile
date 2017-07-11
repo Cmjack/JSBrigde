@@ -4,6 +4,7 @@ source 'https://git.oschina.net/kakaBTravel/kkspecs-pods.git'
 source 'https://github.com/CocoaPods/Specs.git'
 inhibit_all_warnings!
 
+pod 'JSAPI', :path => '../'
 pod 'FLEX'
 pod 'KKProgressHUD'
 pod 'KKRouter'

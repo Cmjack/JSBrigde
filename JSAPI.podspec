@@ -17,8 +17,14 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "CaiMing" => "ming.cai@kakatrip.cn" }
   s.platform     = :ios, "8.0"
-  s.source       = { :git => "https://git.oschina.net/kakaBTravel/JSAPI.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://git.oschina.net/kakaBTravel/jsapi-ios.git", :tag => "#{s.version}" }
   s.source_files  = "Pod/Classes/*.{h,m}"
+
+  s.resources = ['Pod/Classes/*.js','Pod/Classes/*.html']
+
+  # s.resource_bundles = {
+  #   'JSAPI' => ['Pod/Classes/*.js','Pod/Classes/*.html']
+  # }
   s.requires_arc = true
 
   s.dependency "KKProgressHUD"

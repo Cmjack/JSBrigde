@@ -6,7 +6,7 @@
 //  Copyright © 2017年 CaiMing. All rights reserved.
 //
 
-#import "KKWKWebViewController.h"
+#import <KKWKWebViewController.h>
 
 @interface BIZViewController : KKWKWebViewController
 

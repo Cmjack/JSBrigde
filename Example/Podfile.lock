@@ -2,6 +2,9 @@ PODS:
   - DACircularProgress (2.3.1)
   - FLAnimatedImage (1.0.12)
   - FLEX (2.4.0)
+  - JSAPI (0.0.1):
+    - KKProgressHUD
+    - KKRouter
   - KKProgressHUD (0.0.5):
     - MBProgressHUD
   - KKRouter (0.0.2)
@@ -16,20 +19,26 @@ PODS:
 DEPENDENCIES:
   - DACircularProgress
   - FLEX
+  - JSAPI (from `../`)
   - KKProgressHUD
   - KKRouter
   - SDWebImage
   - SDWebImage/GIF
 
+EXTERNAL SOURCES:
+  JSAPI:
+    :path: "../"
+
 SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
+  JSAPI: 86b50ebfcc9039602995aae0d457383f384f80e3
   KKProgressHUD: 938c2a54399a4bc8e0ef4d0da2a41aca34d07e8a
   KKRouter: cf78b361db04c0a6736e61478d4387c6563286b7
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: 4d13e3b2c0e68ee8a1fb597c879d5b1679c1925a
+PODFILE CHECKSUM: 2478604c5615835ca5a2daf95efb0c8f07ad3b4b
 
 COCOAPODS: 1.2.1
